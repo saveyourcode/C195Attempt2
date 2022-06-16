@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
+    <children>
+        <VBox prefHeight="275.0" prefWidth="400.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                    <children>
+                        <Label alignment="CENTER" text="Sign In">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="400.0" spacing="30.0">
+                    <children>
+                        <Label alignment="BOTTOM_LEFT" text="Username">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="loginUsernameText" />
+                    </children>
+                    <padding>
+                        <Insets left="40.0" />
+                    </padding>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="400.0" spacing="32.0">
+                    <children>
+                        <Label text="Password">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="loginPasswordText" />
+                    </children>
+                    <padding>
+                        <Insets left="40.0" />
+                    </padding>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="49.0" prefWidth="400.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onActionLoginButton" text="Login">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="170.0" prefHeight="49.0" prefWidth="400.0">
+                    <children>
+                        <Label fx:id="loginRegionCodeText" text="Region Code" />
+                    </children>
+                    <padding>
+                        <Insets right="20.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+
