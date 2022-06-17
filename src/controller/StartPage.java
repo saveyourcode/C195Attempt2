@@ -2,10 +2,23 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
-public class StartPage {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class StartPage implements Initializable {
+
+    private Parent scene;
+    private Stage stage;
 
     @FXML
     private TableView<?> startPageAppointmentsTableView;
@@ -70,7 +83,12 @@ public class StartPage {
     }
 
     @FXML
-    void onActionStartPageAppointmentsAdd(ActionEvent event) {
+    void onActionStartPageAppointmentsAdd(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
@@ -80,32 +98,56 @@ public class StartPage {
     }
 
     @FXML
-    void onActionStartPageAppointmentsModify(ActionEvent event) {
+    void onActionStartPageAppointmentsModify(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
-    void onActionStartPageCustomerAdd(ActionEvent event) {
+    void onActionStartPageCustomerAdd(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
     void onActionStartPageCustomerDelete(ActionEvent event) {
 
+
+
     }
 
     @FXML
-    void onActionStartPageCustomerModify(ActionEvent event) {
+    void onActionStartPageCustomerModify(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
     void onActionStartPageExit(ActionEvent event) {
 
+        System.exit(0);
+
     }
 
     @FXML
-    void onActionStartPageLogOut(ActionEvent event) {
+    void onActionStartPageLogOut(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
@@ -121,6 +163,11 @@ public class StartPage {
 
     @FXML
     void onActionStartPageWeekRadioButton(ActionEvent event) {
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 }
