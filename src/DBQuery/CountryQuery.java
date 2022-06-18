@@ -1,4 +1,4 @@
-package DBAccess;
+package DBQuery;
 
 import DBConnect.DBConnection;
 import javafx.collections.FXCollections;
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBCountry {
+public abstract class CountryQuery {
 
     public static ObservableList<Country> getAllCountries() {
 
