@@ -35,4 +35,24 @@ public abstract class CountryQuery {
 
         return returnedList;
     }
+
+    public static String getCountryName(int countryId) {
+
+        try {
+
+            String sql = "SELECT Country FROM countries WHERE Country_ID = ?";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setInt(1, countryId);
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                return results.getString("Country");
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "empty";
+
+    }
 }

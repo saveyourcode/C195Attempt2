@@ -16,6 +16,8 @@ public abstract class DBConnection {
     public static void makeConnection() {
         try {
             conn = (Connection) DriverManager.getConnection(DB_URL, username, password);
+            System.out.println("Connection open");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -30,6 +32,8 @@ public abstract class DBConnection {
     public static void closeConnection() {
         try {
             conn.close();
+            System.out.println("Connection closed");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

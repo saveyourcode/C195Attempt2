@@ -1,15 +1,13 @@
 package main;
 
-import DBQuery.AppointmentQuery;
-import DBQuery.CountryQuery;
+import DBQuery.*;
 import DBConnect.DBConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Appointment;
-import model.Country;
+import model.*;
 
 public class Main extends Application {
 
@@ -24,10 +22,11 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         DBConnection.makeConnection();
-        launch(args);
-        for (Appointment appointment: AppointmentQuery.getAllCustomers()) {
-            System.out.println(appointment.getTitle());
-        }
+        //launch(args);
+//        for (Customer cust: CustomerQuery.getAllCustomers()) {
+//            System.out.println(cust.getCustomerName() + " " + cust.getDivisionName() + " " + cust.getCountryName());
+//        }
+//        System.out.println(CountryQuery.getCountryName(3));
         DBConnection.closeConnection();
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public abstract class AppointmentQuery {
 
-    public static ObservableList<Appointment> getAllCustomers() {
+    public static ObservableList<Appointment> getAllAppointments() {
 
         ObservableList<Appointment> resultsList = FXCollections.observableArrayList();
 
