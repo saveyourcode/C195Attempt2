@@ -9,6 +9,8 @@ import model.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public abstract class CustomerQuery {
 
@@ -44,5 +46,66 @@ public abstract class CustomerQuery {
 
         return returnedList;
 
+    }
+
+    public static int insertCustomer(String customerName, String address, String postalCode,
+                                     String phoneNumber, int divisionId) {
+        try {
+
+            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID)" +
+                    " VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, customerName);
+            statement.setString(2, address);
+            statement.setString(3, postalCode);
+            statement.setString(4, phoneNumber);
+            statement.setInt(5, divisionId);
+
+            return statement.executeUpdate();
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    public static int updateCustomer(int customerId, String customerName, String address, String postalCode,
+                                     String phoneNumber, int divisionId) {
+
+        try {
+
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ?" +
+                    " WHERE Customer_ID = ?";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, customerName);
+            statement.setString(2, address);
+            statement.setString(3, postalCode);
+            statement.setString(4, phoneNumber);
+            statement.setInt(5, divisionId);
+            statement.setInt(6, customerId);
+            return statement.executeUpdate();
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    public static int deleteCustomer(int customerId) {
+
+        try {
+
+            String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setInt(1, customerId);
+            return statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }

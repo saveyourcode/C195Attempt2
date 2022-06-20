@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.*;
 
+import java.time.LocalDateTime;
+
 public class Main extends Application {
 
     @Override
@@ -22,11 +24,27 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         DBConnection.makeConnection();
+
         //launch(args);
-//        for (Customer cust: CustomerQuery.getAllCustomers()) {
-//            System.out.println(cust.getCustomerName() + " " + cust.getDivisionName() + " " + cust.getCountryName());
-//        }
-//        System.out.println(CountryQuery.getCountryName(3));
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime later = LocalDateTime.now().plusHours(12);
+
+
+        //AppointmentQuery.insertAppointment("test1", "test2", "test3", "test4", now, later, 1,1,1);
+
+        //AppointmentQuery.updateAppointment(3, "Meeting" , "Meet Up", "Office", "Short Meeting" , now, later, 1, 1, 1);
+
+        //AppointmentQuery.deleteAppointment(3);
+
+        //CustomerQuery.insertCustomer("Bill Williams", "123 Fake Street", "84119", "555-3543", 4);
+
+        //CustomerQuery.updateCustomer(4, "Bill Withers", "123 Fake Street", "55544", "555-5555", 4 );
+
+        CustomerQuery.deleteCustomer(4);
+
         DBConnection.closeConnection();
+
+        System.exit(0);
     }
 }
