@@ -26,12 +26,7 @@ public class Main extends Application {
 
         DBConnection.makeConnection();
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime later = LocalDateTime.now().plusHours(4);
-
-        AppointmentQuery.insertAppointment("title", "desc.", "office", "bill billton", "short", now, later, 1, 3 );
-
-
+        launch(args);
 
         DBConnection.closeConnection();
 

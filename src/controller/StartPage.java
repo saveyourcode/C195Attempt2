@@ -1,5 +1,6 @@
 package controller;
 
+import DBConnect.DBConnection;
 import DBQuery.AppointmentQuery;
 import DBQuery.CustomerQuery;
 import javafx.event.ActionEvent;
@@ -133,15 +134,33 @@ public class StartPage implements Initializable {
     @FXML
     void onActionStartPageCustomerModify(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        if (startPageCustomersTableView.getSelectionModel().getSelectedItem() != null) {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyCustomer.fxml"));
+            loader.load();
+
+            ModifyCustomer modifyCustomerController = loader.getController();
+            modifyCustomerController.transferCustomer(startPageCustomersTableView.getSelectionModel().getSelectedItem());
+
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+//            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//            scene = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
+//            stage.setScene(new Scene(scene));
+//            stage.show();
+
+        }
 
     }
 
     @FXML
     void onActionStartPageExit(ActionEvent event) {
+
+        DBConnection.closeConnection();
 
         System.exit(0);
 

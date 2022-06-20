@@ -63,7 +63,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                        <ComboBox fx:id="modifyCustomerCountryCombo" prefWidth="150.0" promptText="Country" />
+                        <ComboBox fx:id="modifyCustomerCountryCombo" onAction="#onActionCountrySelected" prefWidth="150.0" promptText="Country" />
                </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -76,7 +76,7 @@
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                     <children>
-                        <TextField fx:id="modifyCustomerIDText" />
+                        <TextField fx:id="modifyCustomerIDText" editable="false" opacity="0.5" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

@@ -1,5 +1,8 @@
 package controller;
 
+import DBQuery.CountryQuery;
+import DBQuery.DivisionQuery;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Country;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AddCustomer implements Initializable {
 
@@ -24,10 +30,10 @@ public class AddCustomer implements Initializable {
     private TextField addCustomerAddressText;
 
     @FXML
-    private ComboBox<?> addCustomerCountryCombo;
+    private ComboBox<Country> addCustomerCountryCombo;
 
     @FXML
-    private ComboBox<?> addCustomerDivisionCombo;
+    private ComboBox<Division> addCustomerDivisionCombo;
 
     @FXML
     private TextField addCustomerIDText;
@@ -63,6 +69,23 @@ public class AddCustomer implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        addCustomerCountryCombo.setItems(CountryQuery.getAllCountries());
+
+        addCustomerDivisionCombo.setItems(DivisionQuery.getAllDivisions());
+
+    }
+
+    @FXML
+    void onActionCountrySelected(ActionEvent event) {
+
+        Country country = addCustomerCountryCombo.getValue();
+
+        if (country != null) {
+            addCustomerDivisionCombo.setItems(DivisionQuery.getAllDivisions().stream()
+                    .filter((object) -> object.getCountryId() == country.getCountryId())
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+        }
 
     }
 }

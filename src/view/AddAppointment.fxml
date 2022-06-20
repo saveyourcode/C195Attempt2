@@ -89,7 +89,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                     <children>
-                        <TextField fx:id="addAppointmentAppointmentIDText" />
+                        <TextField fx:id="addAppointmentAppointmentIDText" editable="false" opacity="0.5" text="Auto Generated" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

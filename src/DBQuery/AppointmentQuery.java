@@ -53,8 +53,8 @@ public abstract class AppointmentQuery {
 
     }
 
-    public static int insertAppointment(String title, String description, String location, String contact, String type,
-                                        LocalDateTime start, LocalDateTime end, int customerId, int userId) {
+    public static int insertAppointment(String title, String description, String location, String type,
+                                        LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
 
         try {
 
@@ -69,7 +69,7 @@ public abstract class AppointmentQuery {
             statement.setTimestamp(6, Timestamp.valueOf(end));
             statement.setInt(7, customerId);
             statement.setInt(8, userId);
-            statement.setInt(9, ContactQuery.getContactId(contact));
+            statement.setInt(9, contactId);
 
             return statement.executeUpdate();
 

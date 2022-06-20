@@ -1,5 +1,8 @@
 package controller;
 
+import DBQuery.ContactQuery;
+import DBQuery.CustomerQuery;
+import DBQuery.UserQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,10 +30,10 @@ public class AddAppointment implements Initializable {
     private TextField addAppointmentAppointmentIDText;
 
     @FXML
-    private ComboBox<?> addAppointmentContactsCombo;
+    private ComboBox<Contact> addAppointmentContactsCombo;
 
     @FXML
-    private ComboBox<?> addAppointmentCustomerIDCombo;
+    private ComboBox<Customer> addAppointmentCustomerIDCombo;
 
     @FXML
     private TextField addAppointmentDescriptionText;
@@ -48,7 +54,7 @@ public class AddAppointment implements Initializable {
     private TextField addAppointmentTypeText;
 
     @FXML
-    private ComboBox<?> addAppointmentUserIDCombo;
+    private ComboBox<User> addAppointmentUserIDCombo;
 
     @FXML
     void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
@@ -72,6 +78,12 @@ public class AddAppointment implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        addAppointmentContactsCombo.setItems(ContactQuery.getAllContacts());
+
+        addAppointmentCustomerIDCombo.setItems(CustomerQuery.getAllCustomers());
+
+        addAppointmentUserIDCombo.setItems(UserQuery.getAllUsers());
 
     }
 }

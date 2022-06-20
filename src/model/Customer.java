@@ -75,4 +75,8 @@ public class Customer {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    public String toString() {
+        return this.customerName;
+    }
 }
