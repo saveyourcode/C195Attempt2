@@ -34,4 +34,24 @@ public abstract class ContactQuery {
         return returnedList;
 
     }
+
+    public static int getContactId(String contactName) {
+
+        try {
+
+            String sql = "SELECT Contact_ID FROM contacts WHERE Contact_Name = ?";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                return results.getInt("Contact_ID");
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+
+
+    }
 }

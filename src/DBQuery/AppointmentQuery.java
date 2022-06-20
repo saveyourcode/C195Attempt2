@@ -19,7 +19,12 @@ public abstract class AppointmentQuery {
 
         try {
 
-            String sql = "SELECT * FROM APPOINTMENTS";
+            String sql = "SELECT appointments.Appointment_ID, appointments.Title, appointments.Description,\n" +
+                    " appointments.Location, appointments.Type, appointments.Start, appointments.End,\n" +
+                    " appointments.Customer_ID, appointments.Contact_ID, appointments.User_ID, contacts.Contact_Name\n" +
+                    " FROM appointments INNER JOIN contacts WHERE appointments.Contact_ID = \n" +
+                    "contacts.Contact_ID;";
+
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
             ResultSet results = statement.executeQuery();
             while (results.next()) {
@@ -27,28 +32,30 @@ public abstract class AppointmentQuery {
                 String title = results.getString("Title");
                 String description = results.getString("Description");
                 String location = results.getString("Location");
+                String contact = results.getString("Contact_Name");
                 String type = results.getString("Type");
                 LocalDateTime start = results.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = results.getTimestamp("End").toLocalDateTime();
                 int customerId = results.getInt("Customer_ID");
                 int userId = results.getInt("User_ID");
-                int contactId = results.getInt("Contact_ID");
 
-                resultsList.add(new Appointment(appointmentId, title, description, location, type, start, end,
-                        customerId, userId, contactId));
+
+                resultsList.add(new Appointment(appointmentId, title, description, location, contact, type, start, end,
+                        customerId, userId));
 
             }
 
         } catch(SQLException e) {
-
+            e.printStackTrace();
         }
 
         return resultsList;
 
     }
 
-    public static int insertAppointment(String title, String description, String location, String type, LocalDateTime start,
-                              LocalDateTime end, int customerId, int userId, int contactId) {
+    public static int insertAppointment(String title, String description, String location, String contact, String type,
+                                        LocalDateTime start, LocalDateTime end, int customerId, int userId) {
+
         try {
 
             String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID," +
@@ -62,7 +69,8 @@ public abstract class AppointmentQuery {
             statement.setTimestamp(6, Timestamp.valueOf(end));
             statement.setInt(7, customerId);
             statement.setInt(8, userId);
-            statement.setInt(9, contactId);
+            statement.setInt(9, ContactQuery.getContactId(contact));
+
             return statement.executeUpdate();
 
         } catch(SQLException e) {
@@ -72,9 +80,9 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
-    public static int updateAppointment(int appointmentID, String title, String description, String location,
+    public static int updateAppointment(int appointmentID, String title, String description, String location, String contact,
                                         String type, LocalDateTime start, LocalDateTime end, int customerId,
-                                        int userId, int contactId) {
+                                        int userId) {
 
         try {
 
@@ -89,7 +97,7 @@ public abstract class AppointmentQuery {
             statement.setTimestamp(6, Timestamp.valueOf(end));
             statement.setInt(7, customerId);
             statement.setInt(8, userId);
-            statement.setInt(9, contactId);
+            statement.setInt(9, ContactQuery.getContactId(contact));
             statement.setInt(10, appointmentID);
             return statement.executeUpdate();
 

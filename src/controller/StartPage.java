@@ -1,5 +1,7 @@
 package controller;
 
+import DBQuery.AppointmentQuery;
+import DBQuery.CustomerQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class StartPage implements Initializable {
@@ -21,61 +27,61 @@ public class StartPage implements Initializable {
     private Stage stage;
 
     @FXML
-    private TableView<?> startPageAppointmentsTableView;
+    private TableView<Appointment> startPageAppointmentsTableView;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewAppointmentsCol;
+    private TableColumn<Appointment, Integer> startPageAppointmentsTableViewAppointmentsCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewContactCol;
+    private TableColumn<Appointment, Integer> startPageAppointmentsTableViewContactCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewCustomerIDCol;
+    private TableColumn<Appointment, Integer> startPageAppointmentsTableViewCustomerIDCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewDescriptionCol;
+    private TableColumn<Appointment, LocalDateTime> startPageAppointmentsTableViewDescriptionCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewEndingCol;
+    private TableColumn<Appointment, LocalDateTime> startPageAppointmentsTableViewEndingCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewLocationCol;
+    private TableColumn<Appointment, String> startPageAppointmentsTableViewLocationCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewStartingCol;
+    private TableColumn<Appointment, String> startPageAppointmentsTableViewStartingCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewTitleCol;
+    private TableColumn<Appointment, String> startPageAppointmentsTableViewTitleCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewTypeCol;
+    private TableColumn<Appointment, String> startPageAppointmentsTableViewTypeCol;
 
     @FXML
-    private TableColumn<?, ?> startPageAppointmentsTableViewUserIDCol;
+    private TableColumn<Appointment, Integer> startPageAppointmentsTableViewUserIDCol;
 
     @FXML
-    private TableView<?> startPageCustomersTableView;
+    private TableView<Customer> startPageCustomersTableView;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewAddressCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewAddressCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewCountryCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewCountryCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewCustomerIDCol;
+    private TableColumn<Customer, Integer> startPageCustomersTableViewCustomerIDCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewCustomerNameCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewCustomerNameCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewDivisionCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewDivisionCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewPhoneNumberCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewPhoneNumberCol;
 
     @FXML
-    private TableColumn<?, ?> startPageCustomersTableViewPostalCodeCol;
+    private TableColumn<Customer, String> startPageCustomersTableViewPostalCodeCol;
 
     @FXML
     void onActionStartPageAllRadioButton(ActionEvent event) {
@@ -168,6 +174,30 @@ public class StartPage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        startPageCustomersTableView.setItems(CustomerQuery.getAllCustomers());
+
+        startPageCustomersTableViewCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        startPageCustomersTableViewCustomerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        startPageCustomersTableViewAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        startPageCustomersTableViewPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        startPageCustomersTableViewPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        startPageCustomersTableViewDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
+        startPageCustomersTableViewCountryCol.setCellValueFactory(new PropertyValueFactory<>("countryName"));
+
+        startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
+        startPageAppointmentsTableViewAppointmentsCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        startPageAppointmentsTableViewTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        startPageAppointmentsTableViewDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        startPageAppointmentsTableViewLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        startPageAppointmentsTableViewContactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        startPageAppointmentsTableViewTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startPageAppointmentsTableViewStartingCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        startPageAppointmentsTableViewEndingCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        startPageAppointmentsTableViewCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        startPageAppointmentsTableViewUserIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
 
     }
 }
