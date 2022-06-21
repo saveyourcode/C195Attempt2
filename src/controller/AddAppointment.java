@@ -65,7 +65,17 @@ public class AddAppointment implements Initializable {
     private TextField addAppointmentDateText;
 
     @FXML
-    void onActionAddAppointmentCancel(ActionEvent event) {
+    void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
+    }
+
+    @FXML
+    void onActionAddAppointmentSave(ActionEvent event) throws IOException {
 
         try {
 
@@ -93,21 +103,10 @@ public class AddAppointment implements Initializable {
             e.printStackTrace();
         }
 
-
 //        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 //        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
 //        stage.setScene(new Scene(scene));
 //        stage.show();
-
-    }
-
-    @FXML
-    void onActionAddAppointmentSave(ActionEvent event) throws IOException {
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
     }
 

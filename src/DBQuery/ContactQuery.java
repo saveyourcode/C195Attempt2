@@ -41,6 +41,7 @@ public abstract class ContactQuery {
 
             String sql = "SELECT Contact_ID FROM contacts WHERE Contact_Name = ?";
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, contactName);
             ResultSet results = statement.executeQuery();
             while (results.next()) {
                 return results.getInt("Contact_ID");

@@ -146,8 +146,10 @@ public class ModifyAppointment implements Initializable {
 
         modifyAppointmentContactsCombo.setItems(ContactQuery.getAllContacts());
 
-//        Contact contact = ContactQuery.getAllContacts().stream()
-//                .filter((object) -> appointment.getContactId() == object.getUserId())
-//                .findFirst().orElse(null);
+        Contact contact = ContactQuery.getAllContacts().stream()
+                .filter((object) -> ContactQuery.getContactId(appointment.getContact()) == object.getContactId())
+                .findFirst().orElse(null);
+
+        modifyAppointmentContactsCombo.setValue(contact);
     }
 }

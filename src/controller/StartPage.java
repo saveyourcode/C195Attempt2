@@ -87,6 +87,8 @@ public class StartPage implements Initializable {
     @FXML
     void onActionStartPageAllRadioButton(ActionEvent event) {
 
+        startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
     }
 
     @FXML
@@ -101,6 +103,15 @@ public class StartPage implements Initializable {
 
     @FXML
     void onActionStartPageAppointmentsDelete(ActionEvent event) {
+
+        if (startPageAppointmentsTableView.getSelectionModel().getSelectedItem() != null) {
+
+            Appointment appointment = startPageAppointmentsTableView.getSelectionModel().getSelectedItem();
+
+            AppointmentQuery.deleteAppointment(appointment.getAppointmentId());
+
+            startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+        }
 
     }
 
@@ -142,7 +153,21 @@ public class StartPage implements Initializable {
     @FXML
     void onActionStartPageCustomerDelete(ActionEvent event) {
 
+        if (startPageCustomersTableView.getSelectionModel().getSelectedItem() != null) {
 
+            Customer customer = startPageCustomersTableView.getSelectionModel().getSelectedItem();
+
+            AppointmentQuery.getAllAppointments().stream()
+                    .filter((object) -> object.getCustomerId() == customer.getCustomerId())
+                    .forEach((object) -> AppointmentQuery.deleteAppointment(object.getAppointmentId()));
+
+            CustomerQuery.deleteCustomer(customer.getCustomerId());
+
+            startPageCustomersTableView.setItems(CustomerQuery.getAllCustomers());
+
+            startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
+        }
 
     }
 
