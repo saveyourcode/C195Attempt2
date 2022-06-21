@@ -1,5 +1,6 @@
 package controller;
 
+import DBQuery.AppointmentQuery;
 import DBQuery.ContactQuery;
 import DBQuery.CustomerQuery;
 import DBQuery.UserQuery;
@@ -19,6 +20,10 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
@@ -57,12 +62,42 @@ public class AddAppointment implements Initializable {
     private ComboBox<User> addAppointmentUserIDCombo;
 
     @FXML
-    void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
+    private TextField addAppointmentDateText;
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+    @FXML
+    void onActionAddAppointmentCancel(ActionEvent event) {
+
+        try {
+
+            String title = addAppointmentTitleText.getText();
+            String description = addAppointmentDescriptionText.getText();
+            String location = addAppointmentLocationText.getText();
+            String type = addAppointmentTypeText.getText();
+            LocalDate date = LocalDate.parse(addAppointmentDateText.getText());
+            LocalTime startTime = LocalTime.parse(addAppointmentStartingTimeText.getText());
+            LocalTime endTime = LocalTime.parse(addAppointmentEndingTimeText.getText());
+            LocalDateTime start = LocalDateTime.of(date, startTime);
+            LocalDateTime end = LocalDateTime.of(date, endTime);
+            int customerId = addAppointmentCustomerIDCombo.getValue().getCustomerId();
+            int userId = addAppointmentUserIDCombo.getValue().getUserId();
+            int contactId = addAppointmentContactsCombo.getValue().getContactId();
+
+            AppointmentQuery.insertAppointment(title, description, location, type, start, end, customerId, userId, contactId);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
 
     }
 

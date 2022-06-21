@@ -80,9 +80,9 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
-    public static int updateAppointment(int appointmentID, String title, String description, String location, String contact,
-                                        String type, LocalDateTime start, LocalDateTime end, int customerId,
-                                        int userId) {
+    public static int updateAppointment(String title, String description, String location, String type,
+                                        LocalDateTime start, LocalDateTime end, int customerId, int userId,
+                                        int contactId, int appointmentId) {
 
         try {
 
@@ -97,8 +97,8 @@ public abstract class AppointmentQuery {
             statement.setTimestamp(6, Timestamp.valueOf(end));
             statement.setInt(7, customerId);
             statement.setInt(8, userId);
-            statement.setInt(9, ContactQuery.getContactId(contact));
-            statement.setInt(10, appointmentID);
+            statement.setInt(9, contactId);
+            statement.setInt(10, appointmentId);
             return statement.executeUpdate();
 
         } catch(SQLException e) {

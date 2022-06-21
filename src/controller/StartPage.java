@@ -107,10 +107,25 @@ public class StartPage implements Initializable {
     @FXML
     void onActionStartPageAppointmentsModify(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        if (startPageAppointmentsTableView.getSelectionModel().getSelectedItem() != null) {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyAppointment.fxml"));
+            loader.load();
+
+            ModifyAppointment modifyAppointmentController = loader.getController();
+            modifyAppointmentController.transferAppointment(startPageAppointmentsTableView.getSelectionModel().getSelectedItem());
+
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
 
     }
 

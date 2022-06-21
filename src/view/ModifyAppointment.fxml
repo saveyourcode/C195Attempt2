@@ -63,19 +63,19 @@
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
-                    <children>
-                        <Label text="Starting Time" />
-                    </children>
+               <children>
+                  <Label text="Date" />
+               </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <children>
-                        <Label text="Ending Time" />
-                    </children>
+               <children>
+                        <Label text="Starting Time" />
+               </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <children>
-                        <ComboBox fx:id="modifyAppointmentContactsCombo" prefWidth="150.0" promptText="Contacts" />
-                    </children>
+               <children>
+                        <Label text="Ending Time" />
+               </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <children>
@@ -113,17 +113,23 @@
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
-                    <children>
-                        <TextField fx:id="modifyAppointmentStartingTimeText" />
-                    </children>
+               <children>
+                  <TextField fx:id="modifyAppointmentDateText" promptText="yyyy-mm-dd" />
+               </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                    <children>
-                        <TextField fx:id="modifyAppointmentEndingTimeText" />
-                    </children>
+               <children>
+                        <TextField fx:id="modifyAppointmentStartingTimeText" promptText="hh:mm" />
+               </children>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                        <TextField fx:id="modifyAppointmentEndingTimeText" promptText="hh:mm" />
+               </children></HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <children>
+                        <ComboBox fx:id="modifyAppointmentContactsCombo" prefWidth="150.0" promptText="Contacts" />
+               </children></HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             </children>
         </GridPane>
