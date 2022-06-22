@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Customer;
+import utility.AlertMessages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -168,6 +169,9 @@ public class StartPage implements Initializable {
             startPageCustomersTableView.setItems(CustomerQuery.getAllCustomers());
 
             startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
+            AlertMessages.informationAlert("The customer records and all related appointments for "
+                    + customer.getCustomerName() + " have been deleted.");
 
         }
 

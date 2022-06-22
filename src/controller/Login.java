@@ -1,5 +1,6 @@
 package controller;
 
+import DBQuery.UserQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utility.AlertMessages;
+import utility.Helper;
 
+import javax.swing.text.Utilities;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,12 +39,24 @@ public class Login implements Initializable {
         String username = loginUsernameText.getText();
         String password = loginPasswordText.getText();
 
+        if (Helper.checkPassword(username, password)) {
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } else {
+
+            AlertMessages.errorAlert("Username and password did not match.");
+        }
 
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
 
     }
 

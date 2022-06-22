@@ -42,10 +42,17 @@ public abstract class UserQuery {
 
             String sql = "SELECT Password FROM users WHERE User_Name = ?";
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
-            statement.setString();
+            statement.setString(1, username);
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                return results.getString("Password");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-
+        return "empty";
 
     }
 }
