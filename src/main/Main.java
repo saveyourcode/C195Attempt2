@@ -48,6 +48,14 @@ public class Main extends Application {
 
         launch(args);
 
+//        LocalDateTime now = LocalDateTime.of(2022, 11, 11, 11, 11, 11);
+//        LocalDateTime later = LocalDateTime.of(2022, 12, 12, 12, 12, 12);
+//
+//        Appointment appt1 = new Appointment(1, "title", "description", "location", "contact", "type", now, later, 1, 1);
+//        Appointment appt2 =  new Appointment(1, "title", "description", "location", "contact", "type", now, later, 1, 1);
+//
+//        System.out.println(appt1.equals(appt2));
+
         DBConnection.closeConnection();
 
         System.exit(0);

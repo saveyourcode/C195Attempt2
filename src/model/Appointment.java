@@ -1,6 +1,9 @@
 package model;
 
+import DBQuery.AppointmentQuery;
+
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Appointment {
 
@@ -109,5 +112,45 @@ public class Appointment {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Appointment that = (Appointment) o;
+        return appointmentId == that.appointmentId && customerId == that.customerId && userId == that.userId &&
+                title.equals(that.title) && description.equals(that.description) && location.equals(that.location)
+                && contact.equals(that.contact) && type.equals(that.type) && startTime.equals(that.startTime)
+                && endTime.equals(that.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appointmentId, title, description, location, contact, type, startTime, endTime, customerId, userId);
+    }
+
+    public static boolean checkAppointmentConflict(Appointment checkedAppt) {
+        for (Appointment appointment: AppointmentQuery.getAllAppointments()) {
+            if (appointment.equals(checkedAppt) || (checkedAppt.getCustomerId() != appointment.getCustomerId())) {
+                continue;
+            }
+            if ((checkedAppt.getStartTime().isAfter(appointment.getStartTime()) || checkedAppt.getStartTime().isEqual(appointment.getStartTime())
+            && (checkedAppt.getEndTime().isBefore(appointment.getEndTime())))) {
+                return true;
+            }
+
+            if ((checkedAppt.getEndTime().isAfter(appointment.getStartTime())) && ((checkedAppt.getEndTime().isBefore(appointment.getEndTime()))
+            || (checkedAppt.getEndTime().isEqual(appointment.getEndTime())))) {
+                return true;
+            }
+
+            if (((checkedAppt.getStartTime().isBefore(appointment.getStartTime())) || (checkedAppt.getStartTime().isEqual(appointment.getStartTime())))
+            && ((checkedAppt.getEndTime().isAfter(appointment.getEndTime())) || (checkedAppt.getEndTime().isEqual(appointment.getEndTime())))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

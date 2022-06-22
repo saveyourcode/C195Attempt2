@@ -14,9 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
+import utility.AlertMessages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -92,12 +94,29 @@ public class AddAppointment implements Initializable {
             int userId = addAppointmentUserIDCombo.getValue().getUserId();
             int contactId = addAppointmentContactsCombo.getValue().getContactId();
 
-            AppointmentQuery.insertAppointment(title, description, location, type, start, end, customerId, userId, contactId);
+            Appointment newAppointment = new Appointment(-1, title, description, location, addAppointmentContactsCombo.getValue().getContactName(),
+                    type, start, end, customerId, userId);
+            if (Appointment.checkAppointmentConflict(newAppointment)) {
 
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+                AlertMessages.warningAlert("The meeting can't be scheduled due to a conflict with an existing meeting.");
+
+            } else {
+
+                AppointmentQuery.insertAppointment(title, description, location, type, start, end, customerId, userId, contactId);
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+            }
+
+//            AppointmentQuery.insertAppointment(title, description, location, type, start, end, customerId, userId, contactId);
+//
+//            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//            stage.setScene(new Scene(scene));
+//            stage.show();
 
         } catch(Exception e) {
             e.printStackTrace();
