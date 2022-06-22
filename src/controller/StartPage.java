@@ -3,6 +3,7 @@ package controller;
 import DBConnect.DBConnection;
 import DBQuery.AppointmentQuery;
 import DBQuery.CustomerQuery;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class StartPage implements Initializable {
 
@@ -219,6 +221,12 @@ public class StartPage implements Initializable {
     @FXML
     void onActionStartPageMonthRadioButton(ActionEvent event) {
 
+        final LocalDateTime ldt = LocalDateTime.now().plusHours(721);
+
+        startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments().stream().
+                filter((object) -> object.getStartTime().isBefore(ldt))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+
     }
 
     @FXML
@@ -228,6 +236,12 @@ public class StartPage implements Initializable {
 
     @FXML
     void onActionStartPageWeekRadioButton(ActionEvent event) {
+
+        final LocalDateTime ldt = LocalDateTime.now().plusHours(169);
+
+        startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments().stream().
+                filter((object) -> object.getStartTime().isBefore(ldt))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
 
     }
 
@@ -256,7 +270,6 @@ public class StartPage implements Initializable {
         startPageAppointmentsTableViewEndingCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         startPageAppointmentsTableViewCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         startPageAppointmentsTableViewUserIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
-
 
     }
 }

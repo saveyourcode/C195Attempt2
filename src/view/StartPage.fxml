@@ -6,11 +6,11 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartPage">
    <children>
@@ -39,13 +39,13 @@
                            <children>
                               <TableView fx:id="startPageCustomersTableView" prefHeight="200.0" prefWidth="1000.0">
                                 <columns>
-                                  <TableColumn fx:id="startPageCustomersTableViewCustomerIDCol" prefWidth="75.0" text="Customer ID" />
-                                  <TableColumn fx:id="startPageCustomersTableViewCustomerNameCol" prefWidth="75.0" text="Customer Name" />
-                                    <TableColumn fx:id="startPageCustomersTableViewAddressCol" prefWidth="75.0" text="Address" />
-                                    <TableColumn fx:id="startPageCustomersTableViewPostalCodeCol" prefWidth="75.0" text="Postal Code" />
-                                    <TableColumn fx:id="startPageCustomersTableViewPhoneNumberCol" prefWidth="75.0" text="Phone Number" />
-                                    <TableColumn fx:id="startPageCustomersTableViewCountryCol" prefWidth="75.0" text="Country" />
-                                    <TableColumn fx:id="startPageCustomersTableViewDivisionCol" prefWidth="75.0" text="Division" />
+                                  <TableColumn fx:id="startPageCustomersTableViewCustomerIDCol" prefWidth="100.0" text="Customer ID" />
+                                  <TableColumn fx:id="startPageCustomersTableViewCustomerNameCol" prefWidth="150.0" text="Customer Name" />
+                                    <TableColumn fx:id="startPageCustomersTableViewAddressCol" prefWidth="150.0" text="Address" />
+                                    <TableColumn fx:id="startPageCustomersTableViewPostalCodeCol" prefWidth="150.0" text="Postal Code" />
+                                    <TableColumn fx:id="startPageCustomersTableViewPhoneNumberCol" prefWidth="150.0" text="Phone Number" />
+                                    <TableColumn fx:id="startPageCustomersTableViewCountryCol" prefWidth="150.0" text="Country" />
+                                    <TableColumn fx:id="startPageCustomersTableViewDivisionCol" prefWidth="150.0" text="Division" />
                                 </columns>
                               </TableView>
                            </children>
@@ -75,9 +75,12 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageWeekRadioButton" text="Week" />
-                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageMonthRadioButton" text="Month" />
-                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageAllRadioButton" text="All" />
+                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageWeekRadioButton" text="Week">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="startPageAppointmentsToggle" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageMonthRadioButton" text="Month" toggleGroup="$startPageAppointmentsToggle" />
+                              <RadioButton mnemonicParsing="false" onAction="#onActionStartPageAllRadioButton" selected="true" text="All" toggleGroup="$startPageAppointmentsToggle" />
                            </children>
                            <padding>
                               <Insets left="40.0" />
@@ -87,14 +90,14 @@
                            <children>
                               <TableView fx:id="startPageAppointmentsTableView" prefHeight="200.0" prefWidth="1000.0">
                                 <columns>
-                                  <TableColumn fx:id="startPageAppointmentsTableViewAppointmentsCol" prefWidth="75.0" text="Appointment ID" />
-                                  <TableColumn fx:id="startPageAppointmentsTableViewTitleCol" prefWidth="75.0" text="Title" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewDescriptionCol" prefWidth="75.0" text="Description" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewLocationCol" prefWidth="75.0" text="Location" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewContactCol" prefWidth="75.0" text="Contact" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewTypeCol" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewStartingCol" prefWidth="75.0" text="Starting" />
-                                    <TableColumn fx:id="startPageAppointmentsTableViewEndingCol" prefWidth="75.0" text="Ending" />
+                                  <TableColumn fx:id="startPageAppointmentsTableViewAppointmentsCol" prefWidth="100.0" text="Appointment ID" />
+                                  <TableColumn fx:id="startPageAppointmentsTableViewTitleCol" prefWidth="100.0" text="Title" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewDescriptionCol" prefWidth="110.0" text="Description" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewLocationCol" prefWidth="110.0" text="Location" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewContactCol" prefWidth="110.0" text="Contact" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewTypeCol" prefWidth="100.0" text="Type" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewStartingCol" prefWidth="110.0" text="Starting" />
+                                    <TableColumn fx:id="startPageAppointmentsTableViewEndingCol" prefWidth="110.0" text="Ending" />
                                     <TableColumn fx:id="startPageAppointmentsTableViewCustomerIDCol" prefWidth="75.0" text="Customer ID" />
                                     <TableColumn fx:id="startPageAppointmentsTableViewUserIDCol" prefWidth="75.0" text="User ID" />
                                 </columns>

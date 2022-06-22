@@ -32,6 +32,11 @@ public class Login implements Initializable {
     @FXML
     void onActionLoginButton(ActionEvent event) throws IOException {
 
+        String username = loginUsernameText.getText();
+        String password = loginPasswordText.getText();
+
+
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
         stage.setScene(new Scene(scene));

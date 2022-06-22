@@ -35,4 +35,17 @@ public abstract class UserQuery {
         return returnedList;
 
     }
+
+    public static String getPassword(String username) {
+
+        try {
+
+            String sql = "SELECT Password FROM users WHERE User_Name = ?";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString();
+        }
+
+
+
+    }
 }

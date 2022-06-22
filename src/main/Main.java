@@ -30,11 +30,11 @@ public class Main extends Application {
 //
 //        CustomerQuery.insertCustomer("Albus Dumbledore", "Hogwarts", "GU95", "020-8547-1221", 101);
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime later = LocalDateTime.now().plusHours(1);
-
-        AppointmentQuery.insertAppointment("appointment1" , "first appointment" , "conference room", "informational", now, later, 1, 1, 1 );
-
+//        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime later = LocalDateTime.now().plusHours(1);
+//
+//        AppointmentQuery.insertAppointment("appointment1" , "first appointment" , "conference room", "informational", now, later, 1, 1, 1 );
+//
 //        LocalDateTime nower = LocalDateTime.now().plusMinutes(15);
 //        LocalDateTime laterer = LocalDateTime.now().plusMinutes(35);
 //
