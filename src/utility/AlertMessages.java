@@ -22,6 +22,14 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    public static void errorAlert(String head, String body) {
+
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(head);
+        alert.setContentText(body);
+        alert.showAndWait();
+    }
+
     public static void informationAlert(String text) {
 
         alert = new Alert(Alert.AlertType.INFORMATION);

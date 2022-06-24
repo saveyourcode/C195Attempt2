@@ -17,21 +17,39 @@ import utility.Helper;
 import javax.swing.text.Utilities;
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
 
     private Stage stage;
     private Parent scene;
+    private ResourceBundle bundle;
+
+    @FXML
+    private Button loginButtonLabel;
+
+    @FXML
+    private Label loginLocationLabel;
+
+    @FXML
+    private Label loginPasswordLabel;
 
     @FXML
     private TextField loginPasswordText;
 
     @FXML
-    private Label loginRegionCodeText;
+    private Label loginSignInLabel;
+
+    @FXML
+    private Label loginUsernameLabel;
 
     @FXML
     private TextField loginUsernameText;
+
+    @FXML
+    private Label loginZoneIdText;
 
     @FXML
     void onActionLoginButton(ActionEvent event) throws IOException {
@@ -48,7 +66,7 @@ public class Login implements Initializable {
 
         } else {
 
-            AlertMessages.errorAlert("Username and password did not match.");
+            AlertMessages.errorAlert(bundle.getString("errorHead"), bundle.getString("errorBody"));
         }
 
 
@@ -62,6 +80,19 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+//        Locale french = new Locale("fr");
+//
+//        Locale.setDefault(french);
+
+        bundle = ResourceBundle.getBundle("utility/translation", Locale.getDefault());
+
+        loginSignInLabel.setText(bundle.getString("signIn"));
+        loginUsernameLabel.setText(bundle.getString("username"));
+        loginPasswordLabel.setText(bundle.getString("password"));
+        loginButtonLabel.setText(bundle.getString("login"));
+        loginLocationLabel.setText(bundle.getString("location"));
+        loginZoneIdText.setText(String.valueOf(ZoneId.systemDefault()));
 
     }
 }

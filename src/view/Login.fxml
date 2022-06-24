@@ -15,7 +15,7 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
                     <children>
-                        <Label alignment="CENTER" text="Sign In">
+                        <Label fx:id="loginSignInLabel" alignment="CENTER" text="Sign In">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
@@ -24,7 +24,7 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="400.0" spacing="30.0">
                     <children>
-                        <Label alignment="BOTTOM_LEFT" text="Username">
+                        <Label fx:id="loginUsernameLabel" alignment="BOTTOM_LEFT" text="Username">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -37,7 +37,7 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="400.0" spacing="32.0">
                     <children>
-                        <Label text="Password">
+                        <Label fx:id="loginPasswordLabel" text="Password">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -50,16 +50,17 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="49.0" prefWidth="400.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#onActionLoginButton" text="Login">
+                        <Button fx:id="loginButtonLabel" mnemonicParsing="false" onAction="#onActionLoginButton" text="Login">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="170.0" prefHeight="49.0" prefWidth="400.0">
+                <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="170.0" prefHeight="49.0" prefWidth="400.0" spacing="20.0">
                     <children>
-                        <Label fx:id="loginRegionCodeText" text="Region Code" />
+                  <Label fx:id="loginLocationLabel" text="Location" />
+                        <Label fx:id="loginZoneIdText" text="Zone Id" />
                     </children>
                     <padding>
                         <Insets right="20.0" />
@@ -69,4 +70,3 @@
         </VBox>
     </children>
 </AnchorPane>
-
