@@ -19,6 +19,7 @@ import model.Contact;
 import model.Customer;
 import model.User;
 import utility.AlertMessages;
+import utility.Helper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -94,34 +95,30 @@ public class ModifyAppointment implements Initializable {
             int contactId = modifyAppointmentContactsCombo.getValue().getContactId();
             int appointmentId = Integer.parseInt(modifyAppointmentAppointmentIDText.getText());
 
+            if (!(Helper.checkIfWithinBusinessHours(start)) || !(Helper.checkIfWithinBusinessHours(end))) {
+
+                AlertMessages.warningAlert("Meetings can't be scheduled outside of 08:00 - 10:00 EST");
+                return;
+            }
+
             Appointment newAppointment = new Appointment(appointmentId, title, description, location, modifyAppointmentContactsCombo.getValue().getContactName(),
                     type, start, end, customerId, userId);
 
             if (Appointment.checkAppointmentConflict(newAppointment)) {
 
                 AlertMessages.warningAlert("The meeting can't be scheduled due to a conflict with an existing meeting.");
-
-            } else {
-
-                AppointmentQuery.updateAppointment(title, description, location, type, start, end, customerId, userId,
-                        contactId, appointmentId);
-
-
-                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
+                return;
 
             }
 
-//            AppointmentQuery.updateAppointment(title, description, location, type, start, end, customerId, userId,
-//                    contactId, appointmentId);
-//
-//
-//            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//            stage.setScene(new Scene(scene));
-//            stage.show();
+            AppointmentQuery.updateAppointment(title, description, location, type, start, end, customerId, userId,
+                    contactId, appointmentId);
+
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
 
         } catch(Exception e) {
             e.printStackTrace();

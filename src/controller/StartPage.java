@@ -22,6 +22,7 @@ import utility.AlertMessages;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -274,6 +275,33 @@ public class StartPage implements Initializable {
         startPageAppointmentsTableViewEndingCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         startPageAppointmentsTableViewCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         startPageAppointmentsTableViewUserIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+    }
+
+    public void transferFromLogin() {
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime in15min = LocalDateTime.now().plusMinutes(15);
+
+        ArrayList<Appointment> appointmentList = AppointmentQuery.getAllAppointments().stream()
+                .filter((appt) -> (appt.getStartTime().isAfter(now) && appt.getStartTime().isBefore(in15min)))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        if (appointmentList.isEmpty()) {
+
+            AlertMessages.informationAlert("There are no upcoming appointments");
+
+        } else {
+
+            String message = "";
+            for(Appointment appt: appointmentList) {
+
+                message += ("Appointment ID: " + appt.getAppointmentId() + " is at " + appt.getStartTime().toLocalTime() + "\n");
+
+            }
+
+            AlertMessages.informationAlert("Upcoming Appointments", message);
+        }
 
     }
 }

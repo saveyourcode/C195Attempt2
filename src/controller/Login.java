@@ -59,10 +59,22 @@ public class Login implements Initializable {
 
         if (Helper.checkPassword(username, password)) {
 
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/StartPage.fxml"));
+            loader.load();
+
+            StartPage startPageController = loader.getController();
+            startPageController.transferFromLogin();
+
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
             stage.show();
+
+//            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//            stage.setScene(new Scene(scene));
+//            stage.show();
 
         } else {
 

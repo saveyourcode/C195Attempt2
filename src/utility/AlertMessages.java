@@ -37,6 +37,14 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    public static void informationAlert(String head, String body) {
+
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(head);
+        alert.setContentText(body);
+        alert.showAndWait();
+    }
+
     public static boolean confirmationAlert(String text) {
 
         alert = new Alert(Alert.AlertType.CONFIRMATION);

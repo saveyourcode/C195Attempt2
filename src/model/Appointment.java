@@ -132,7 +132,7 @@ public class Appointment {
 
     public static boolean checkAppointmentConflict(Appointment checkedAppt) {
         for (Appointment appointment: AppointmentQuery.getAllAppointments()) {
-            if (appointment.equals(checkedAppt) || (checkedAppt.getCustomerId() != appointment.getCustomerId())) {
+            if ((checkedAppt.getAppointmentId() == appointment.getAppointmentId())) {
                 continue;
             }
             if ((checkedAppt.getStartTime().isAfter(appointment.getStartTime()) || checkedAppt.getStartTime().isEqual(appointment.getStartTime())
