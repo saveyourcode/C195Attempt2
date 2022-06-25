@@ -22,26 +22,18 @@ public class Helper {
 
     public static boolean checkIfWithinBusinessHours(LocalDateTime localDateTime) {
 
-        LocalDate localDate = localDateTime.toLocalDate();
+        LocalTime openingTime = LocalTime.of(8, 00);
+        LocalTime closingTime = LocalTime.of(22, 00);
 
-        ZonedDateTime localDefault = ZonedDateTime.of(localDateTime, zoneDefault);
-        ZonedDateTime eastOpenDefault = ZonedDateTime.of(localDate, LocalTime.of(8, 00), zoneDefault);
-        ZonedDateTime eastCloseDefault = ZonedDateTime.of(localDate, LocalTime.of(22, 00), zoneDefault);
+        ZonedDateTime zonedLocal = ZonedDateTime.of(localDateTime, zoneDefault);
 
-        ZonedDateTime localUTC = ZonedDateTime.ofInstant(localDefault.toInstant(), zoneUTC);
-        ZonedDateTime eastOpenUTC = ZonedDateTime.ofInstant(eastOpenDefault.toInstant(), zoneUTC);
-        ZonedDateTime eastCloseUTC = ZonedDateTime.ofInstant(eastCloseDefault.toInstant(), zoneUTC);
+        ZonedDateTime localInEST = ZonedDateTime.ofInstant(zonedLocal.toInstant(), zoneEST);
 
-        ZonedDateTime localEast = ZonedDateTime.ofInstant(localUTC.toInstant(), zoneEST);
-        ZonedDateTime eastOpenEST = ZonedDateTime.ofInstant(eastOpenUTC.toInstant(), zoneEST);
-        ZonedDateTime eastCloseEST = ZonedDateTime.ofInstant(eastCloseUTC.toInstant(), zoneEST);
-
-        if (((localEast.isAfter(eastOpenEST)) || (localEast.isEqual(eastOpenEST))) &&
-                ((localEast.isBefore(eastCloseEST)) || (localEast.isEqual(eastCloseEST)))) {
+        if (((localInEST.toLocalTime().isAfter(openingTime)) || (localInEST.toLocalTime().equals(openingTime))) &&
+                ((localInEST.toLocalTime().isBefore(closingTime)) || (localInEST.toLocalTime().equals(closingTime)))) {
 
             return true;
         }
-
 
         return false;
 
