@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Main extends Application {
 
@@ -46,8 +47,6 @@ public class Main extends Application {
 //
 //        AppointmentQuery.insertAppointment("appointment3" , "third appointment" , "media room", "presentation", nowest, laterest, 1, 1, 1 );
 
-        launch(args);
-
 //        LocalDateTime now = LocalDateTime.of(2022, 11, 11, 11, 11, 11);
 //        LocalDateTime later = LocalDateTime.of(2022, 12, 12, 12, 12, 12);
 //
@@ -55,6 +54,9 @@ public class Main extends Application {
 //        Appointment appt2 =  new Appointment(1, "title", "description", "location", "contact", "type", now, later, 1, 1);
 //
 //        System.out.println(appt1.equals(appt2));
+
+
+        launch(args);
 
         DBConnection.closeConnection();
 

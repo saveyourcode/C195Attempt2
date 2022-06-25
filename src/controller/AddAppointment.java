@@ -19,6 +19,7 @@ import model.Contact;
 import model.Customer;
 import model.User;
 import utility.AlertMessages;
+import utility.Helper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -93,6 +94,15 @@ public class AddAppointment implements Initializable {
             int customerId = addAppointmentCustomerIDCombo.getValue().getCustomerId();
             int userId = addAppointmentUserIDCombo.getValue().getUserId();
             int contactId = addAppointmentContactsCombo.getValue().getContactId();
+
+            if (!(Helper.checkIfWithinBusinessHours(start))) {
+
+                AlertMessages.warningAlert("Meetings can't be scheduled outside of 8 - 10 EST");
+            }
+            if (!(Helper.checkIfWithinBusinessHours(end))) {
+
+                AlertMessages.warningAlert("Meetings can't be scheduled outside of 8 - 10 EST");
+            }
 
             Appointment newAppointment = new Appointment(-1, title, description, location, addAppointmentContactsCombo.getValue().getContactName(),
                     type, start, end, customerId, userId);
