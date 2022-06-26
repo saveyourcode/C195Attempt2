@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Appointment;
@@ -27,6 +28,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
@@ -68,6 +70,9 @@ public class AddAppointment implements Initializable {
     private TextField addAppointmentDateText;
 
     @FXML
+    private DatePicker addAppointmentDatePicker;
+
+    @FXML
     void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -86,7 +91,7 @@ public class AddAppointment implements Initializable {
             String description = addAppointmentDescriptionText.getText();
             String location = addAppointmentLocationText.getText();
             String type = addAppointmentTypeText.getText();
-            LocalDate date = LocalDate.parse(addAppointmentDateText.getText());
+            LocalDate date = addAppointmentDatePicker.getValue();
             LocalTime startTime = LocalTime.parse(addAppointmentStartingTimeText.getText());
             LocalTime endTime = LocalTime.parse(addAppointmentEndingTimeText.getText());
             LocalDateTime start = LocalDateTime.of(date, startTime);
@@ -116,6 +121,18 @@ public class AddAppointment implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
 
+        } catch(DateTimeParseException e) {
+
+            String header = "Time needs to be in HH:MM format.";
+            String message = "Exception: " + e + "\n" + "\n" + "Exception: " + e.getMessage();
+            AlertMessages.errorAlert(header, message);
+
+        } catch(NullPointerException e) {
+
+            String header = "Need to make a selection for the Customer, Contact, and User fields.";
+            String message = "Exception: " + e + "\n" + "\n" +"Exception: " + e.getMessage();
+            AlertMessages.errorAlert(header, message);
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -135,6 +152,8 @@ public class AddAppointment implements Initializable {
         addAppointmentCustomerIDCombo.setItems(CustomerQuery.getAllCustomers());
 
         addAppointmentUserIDCombo.setItems(UserQuery.getAllUsers());
+
+        addAppointmentDatePicker.setValue(LocalDate.now());
 
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Appointment;
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
 public class ModifyAppointment implements Initializable {
@@ -67,6 +69,9 @@ public class ModifyAppointment implements Initializable {
     private TextField modifyAppointmentDateText;
 
     @FXML
+    private DatePicker modifyAppointmentDatePicker;
+
+    @FXML
     void onActionModifyAppointmentCancel(ActionEvent event) throws IOException {
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -85,7 +90,7 @@ public class ModifyAppointment implements Initializable {
             String description = modifyAppointmentDescriptionText.getText();
             String location = modifyAppointmentLocationText.getText();
             String type = modifyAppointmentTypeText.getText();
-            LocalDate date = LocalDate.parse(modifyAppointmentDateText.getText());
+            LocalDate date = modifyAppointmentDatePicker.getValue();
             LocalTime startTime = LocalTime.parse(modifyAppointmentStartingTimeText.getText());
             LocalTime endTime = LocalTime.parse(modifyAppointmentEndingTimeText.getText());
             LocalDateTime start = LocalDateTime.of(date, startTime);
@@ -120,6 +125,18 @@ public class ModifyAppointment implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
 
+        } catch(DateTimeParseException e) {
+
+            String header = "Time needs to be in HH:MM format.";
+            String message = "Exception: " + e + "\n" + "\n" + "Exception: " + e.getMessage();
+            AlertMessages.errorAlert(header, message);
+
+        } catch(NullPointerException e) {
+
+            String header = "Need to make a selection for the Customer, Contact, and User fields.";
+            String message = "Exception: " + e + "\n" + "\n" +"Exception: " + e.getMessage();
+            AlertMessages.errorAlert(header, message);
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -142,7 +159,7 @@ public class ModifyAppointment implements Initializable {
         modifyAppointmentDescriptionText.setText(appointment.getDescription());
         modifyAppointmentLocationText.setText(appointment.getLocation());
         modifyAppointmentTypeText.setText(appointment.getType());
-        modifyAppointmentDateText.setText(String.valueOf(LocalDate.from(appointment.getStartTime())));
+        modifyAppointmentDatePicker.setValue(LocalDate.from(appointment.getStartTime()));
         modifyAppointmentStartingTimeText.setText(String.valueOf(LocalTime.from(appointment.getStartTime())));
         modifyAppointmentEndingTimeText.setText(String.valueOf(LocalTime.from(appointment.getEndTime())));
         modifyAppointmentAppointmentIDText.setText(String.valueOf(appointment.getAppointmentId()));
