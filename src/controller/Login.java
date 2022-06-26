@@ -15,8 +15,12 @@ import utility.AlertMessages;
 import utility.Helper;
 
 import javax.swing.text.Utilities;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -59,6 +63,8 @@ public class Login implements Initializable {
 
         if (Helper.checkPassword(username, password)) {
 
+            recordLoginActivity(username, "Login Attempt Successful");
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/StartPage.fxml"));
             loader.load();
@@ -77,6 +83,8 @@ public class Login implements Initializable {
 //            stage.show();
 
         } else {
+
+            recordLoginActivity(username, "Login Attempt Unsuccessful");
 
             AlertMessages.errorAlert(bundle.getString("errorHead"), bundle.getString("errorBody"));
         }
@@ -105,6 +113,23 @@ public class Login implements Initializable {
         loginButtonLabel.setText(bundle.getString("login"));
         loginLocationLabel.setText(bundle.getString("location"));
         loginZoneIdText.setText(String.valueOf(ZoneId.systemDefault()));
+
+    }
+
+    public void recordLoginActivity(String username, String successfulOrNot) {
+
+        try {
+
+            FileWriter file = new FileWriter("login_activity.txt", true);
+            PrintWriter writer = new PrintWriter(file);
+            writer.println(username + "," + LocalDate.now() + "," + LocalTime.now() + "," + successfulOrNot);
+            writer.close();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
 
     }
 }
