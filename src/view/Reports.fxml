@@ -39,7 +39,10 @@
                                        <children>
                                           <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
                                              <children>
-                                                <Label text="Appointment Type: " />
+                                                <Label text="Appointment Type: ">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></Label>
                                                 <ComboBox fx:id="totalAppointmentTabTypeCombo" onAction="#onActionTypeSelected" prefWidth="150.0" promptText="Type" />
                                              </children>
                                              <padding>
@@ -295,11 +298,20 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <HBox layoutX="282.0" layoutY="175.0" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="795.0" spacing="20.0">
                                        <children>
-                                          <Label text="TEST" />
+                                          <Label text="Contact Name:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="scheduleByContactCombo" onAction="#onActionContactSelected" prefWidth="150.0" promptText="Contact" />
                                        </children>
+                                       <padding>
+                                          <Insets left="60.0" />
+                                       </padding>
                                     </HBox>
+                                    <HBox layoutX="-1.0" layoutY="50.0" prefHeight="425.0" prefWidth="800.0" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>

@@ -64,29 +64,32 @@ public class Reports implements Initializable {
     private ComboBox<String> totalAppointmentTabTypeCombo;
 
     @FXML
+    private ComboBox<String> scheduleByContactCombo;
+
+    @FXML
     void onActionTypeSelected(ActionEvent event) {
 
+        String type = totalAppointmentTabTypeCombo.getValue();
+        reportsJanuaryAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 1)));
+        reportsFebruaryAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 2)));
+        reportsMarchAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 3)));
+        reportsAprilAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 4)));
+        reportsMayAmountLabel.setText(String.valueOf((returnCountForTypeAndMonth(type, 5))));
+        reportsJuneAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 6)));
+        reportsJulyAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type,7)));
+        reportsAugustAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 8)));
+        reportsSeptemberAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 9)));
+        reportsOctoberAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 10)));
+        reportsNovemberAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 11)));
+        reportsDecemberAmountLabel.setText(String.valueOf(returnCountForTypeAndMonth(type, 12)));
+
     }
 
     @FXML
-    void scheduleByContactTabSelected(ActionEvent event) {
+    void onActionContactSelected(ActionEvent event) {
 
     }
 
-    @FXML
-    void totalAppointmentsTabSelected(ActionEvent event) {
-
-//        ObservableList<String> typeList = AppointmentQuery.getAllAppointments().stream()
-//                .map((appt) -> appt.getType())
-//                .distinct()
-//                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-//
-//        if (!typeList.isEmpty()) {
-//            totalAppointmentTabTypeCombo.setItems(typeList);
-//        }
-
-
-    }
 
     @FXML
     void onActionReturnToStartPage(ActionEvent event) throws IOException {
@@ -112,5 +115,24 @@ public class Reports implements Initializable {
             totalAppointmentTabTypeCombo.setItems(typeList);
         }
 
+        ObservableList<String> contactList = AppointmentQuery.getAllAppointments().stream()
+                .map((appt) -> appt.getContact())
+                .distinct()
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        if(!contactList.isEmpty()) {
+            scheduleByContactCombo.setItems(contactList);
+        }
+
+    }
+
+    public long returnCountForTypeAndMonth(String type, int month) {
+
+        long count = AppointmentQuery.getAllAppointments().stream()
+                .filter((appt) -> appt.getType().equals(type))
+                .filter((appt) -> appt.getStartTime().getMonthValue() == month)
+                .count();
+
+        return count;
     }
 }
