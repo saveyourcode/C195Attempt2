@@ -235,7 +235,20 @@ public class StartPage implements Initializable {
     }
 
     @FXML
-    void onActionStartPageReports(ActionEvent event) {
+    void onActionStartPageReports(ActionEvent actionEvent) {
+
+        try {
+
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            e.getMessage();
+            e.getCause();
+        }
 
     }
 
