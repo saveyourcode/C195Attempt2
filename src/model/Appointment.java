@@ -132,20 +132,30 @@ public class Appointment {
                 continue;
             }
 
-            if ((checkedAppt.getStartTime().isAfter(appointment.getStartTime()) || checkedAppt.getStartTime().isEqual(appointment.getStartTime())
-            && (checkedAppt.getEndTime().isBefore(appointment.getEndTime())))) {
+            if ((checkedAppt.getStartTime().isAfter(appointment.getStartTime())) && (checkedAppt.getStartTime()
+                    .isBefore(appointment.getEndTime()))) {
+
                 return true;
             }
 
-            if ((checkedAppt.getEndTime().isAfter(appointment.getStartTime())) && ((checkedAppt.getEndTime().isBefore(appointment.getEndTime()))
-            || (checkedAppt.getEndTime().isEqual(appointment.getEndTime())))) {
+            if ((checkedAppt.getEndTime().isAfter(appointment.getStartTime())) && (checkedAppt.getEndTime()
+                    .isBefore(appointment.getEndTime()))) {
+
                 return true;
             }
 
-            if (((checkedAppt.getStartTime().isBefore(appointment.getStartTime())) || (checkedAppt.getStartTime().isEqual(appointment.getStartTime())))
-            && ((checkedAppt.getEndTime().isAfter(appointment.getEndTime())) || (checkedAppt.getEndTime().isEqual(appointment.getEndTime())))) {
+            if ((checkedAppt.getStartTime().isBefore(appointment.getStartTime())) && (checkedAppt.getEndTime()
+                    .isAfter(appointment.getEndTime()))) {
+
                 return true;
             }
+
+            if ((checkedAppt.getStartTime().isEqual(appointment.getStartTime())) || (checkedAppt.getEndTime()
+                    .isEqual(appointment.getEndTime()))) {
+
+                return true;
+            }
+
         }
 
         return false;

@@ -1,6 +1,7 @@
 package controller;
 
 import DBQuery.CountryQuery;
+import DBQuery.CustomerQuery;
 import DBQuery.DivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
 import model.Division;
+import utility.AlertMessages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,10 +62,31 @@ public class AddCustomer implements Initializable {
     @FXML
     void onActionAddCustomerSave(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        try {
+
+            String customerName = addCustomerNameText.getText();
+            String address = addCustomerAddressText.getText();
+            String postalCode = addCustomerPostalCodeText.getText();
+            String phoneNumber = addCustomerPhoneNumberText.getText();
+            int divisionId = (addCustomerDivisionCombo.getValue().getDivisionId());
+
+            CustomerQuery.insertCustomer(customerName, address, postalCode, phoneNumber, divisionId);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } catch(NullPointerException e) {
+            AlertMessages.warningAlert("Please select a country and division");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
 
     }
 

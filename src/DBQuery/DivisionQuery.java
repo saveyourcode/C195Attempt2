@@ -54,4 +54,18 @@ public abstract class DivisionQuery {
         return "empty";
 
     }
+
+    public static int getDivisionId(String divisionName) throws SQLException {
+
+        String sql = "SELECT Division_ID FROM first_level_divisions Where Division = ?";
+        PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+        statement.setString(1, divisionName);
+        ResultSet results = statement.executeQuery();
+        while(results.next()) {
+            return results.getInt("Division_ID");
+        }
+
+        return -1;
+
+    }
 }

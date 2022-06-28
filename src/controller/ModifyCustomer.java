@@ -1,6 +1,7 @@
 package controller;
 
 import DBQuery.CountryQuery;
+import DBQuery.CustomerQuery;
 import DBQuery.DivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,10 +63,30 @@ public class ModifyCustomer implements Initializable {
     @FXML
     void onActionModifyCustomerSave(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        try {
+
+            int customerId = Integer.parseInt(modifyCustomerIDText.getText());
+            String customerName = modifyCustomerNameText.getText();
+            String address = modifyCustomerAddressText.getText();
+            String postalCode = modifyCustomerPostalCodeText.getText();
+            String phoneNumber = modifyCustomerPhoneNumberText.getText();
+            int divisionId = modifyCustomerDivisionCombo.getValue().getDivisionId();
+
+            CustomerQuery.updateCustomer(customerId, customerName, address, postalCode, phoneNumber, divisionId);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
 
     }
 

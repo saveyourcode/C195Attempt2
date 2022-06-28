@@ -112,9 +112,18 @@ public class StartPage implements Initializable {
 
             Appointment appointment = startPageAppointmentsTableView.getSelectionModel().getSelectedItem();
 
-            AppointmentQuery.deleteAppointment(appointment.getAppointmentId());
+            if (AlertMessages.confirmationAlert("Are you sure you want to delete the appointment with " +
+                    "appointment ID " + appointment.getAppointmentId() + " and type " + appointment.getType() + " ?")) {
 
-            startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+                AppointmentQuery.deleteAppointment(appointment.getAppointmentId());
+
+                startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
+                AlertMessages.informationAlert("The appointment with appointment id " + appointment.getAppointmentId() +
+                        " and type " + appointment.getType() + " has been deleted.");
+
+            }
+
         }
 
     }
@@ -161,18 +170,23 @@ public class StartPage implements Initializable {
 
             Customer customer = startPageCustomersTableView.getSelectionModel().getSelectedItem();
 
-            AppointmentQuery.getAllAppointments().stream()
-                    .filter((object) -> object.getCustomerId() == customer.getCustomerId())
-                    .forEach((object) -> AppointmentQuery.deleteAppointment(object.getAppointmentId()));
+            if (AlertMessages.confirmationAlert("Are you Sure you want to delete the customer " +
+                    customer.getCustomerName() + " and all associated appointments?")) {
 
-            CustomerQuery.deleteCustomer(customer.getCustomerId());
+                AppointmentQuery.getAllAppointments().stream()
+                        .filter((object) -> object.getCustomerId() == customer.getCustomerId())
+                        .forEach((object) -> AppointmentQuery.deleteAppointment(object.getAppointmentId()));
 
-            startPageCustomersTableView.setItems(CustomerQuery.getAllCustomers());
+                CustomerQuery.deleteCustomer(customer.getCustomerId());
 
-            startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+                startPageCustomersTableView.setItems(CustomerQuery.getAllCustomers());
 
-            AlertMessages.informationAlert("The customer records and all related appointments for "
-                    + customer.getCustomerName() + " have been deleted.");
+                startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments());
+
+                AlertMessages.informationAlert("The customer records and all related appointments for "
+                        + customer.getCustomerName() + " have been deleted.");
+
+            }
 
         }
 
