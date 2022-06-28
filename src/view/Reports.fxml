@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -311,10 +313,66 @@
                                           <Insets left="60.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox layoutX="-1.0" layoutY="50.0" prefHeight="425.0" prefWidth="800.0" />
+                                    <HBox alignment="CENTER" layoutX="-1.0" layoutY="50.0" prefHeight="425.0" prefWidth="800.0">
+                                       <children>
+                                          <TableView fx:id="scheduleByContactTableView" prefHeight="345.0" prefWidth="700.0">
+                                            <columns>
+                                              <TableColumn fx:id="scheduleByContactApptIDCol" prefWidth="100.0" text="Appointment ID" />
+                                              <TableColumn fx:id="scheduleByContactTitleCol" prefWidth="100.0" text="Title" />
+                                                <TableColumn fx:id="scheduleByContactTypeCol" prefWidth="100.0" text="Type" />
+                                                <TableColumn fx:id="scheduleByContactDescriptionCol" prefWidth="100.0" text="Description" />
+                                                <TableColumn fx:id="scheduleByContactStartCol" prefWidth="100.0" text="Start" />
+                                                <TableColumn fx:id="scheduleByContactEndCol" prefWidth="100.0" text="End" />
+                                                <TableColumn fx:id="scheduleByContactCustIDCol" prefWidth="100.0" text="Customer ID" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="40.0" top="40.0" />
+                                       </padding></HBox>
                                  </children></AnchorPane>
                         </content>
                       </Tab>
+                        <Tab text="Customers by Division">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="795.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Country:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="customersByDivisionCountryCombo" onAction="#onActionCountrySelected" prefWidth="150.0" promptText="Country" />
+                                          <Label text="Division:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="customersByDivisionDivisionCombo" onAction="#onActionDivisionSelected" prefWidth="150.0" promptText="Division" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="-1.0" layoutY="50.0" prefHeight="425.0" prefWidth="800.0">
+                                       <children>
+                                          <TableView fx:id="customersByDivisionTableView" prefHeight="345.0" prefWidth="600.0">
+                                             <columns>
+                                                <TableColumn fx:id="customersByDivisionCustIDCol" prefWidth="100.0" text="Customer ID" />
+                                                <TableColumn fx:id="customersByDivisionCustNameCol" prefWidth="125.0" text="Customer Name" />
+                                                <TableColumn fx:id="customersByDivisionAddressCol" prefWidth="125.0" text="Address" />
+                                                <TableColumn fx:id="customersByDivisionPostalCodeCol" prefWidth="125.0" text="Postal Code" />
+                                                <TableColumn fx:id="customersByDivisionPhoneNumberCol" prefWidth="125.0" text="Phone Number" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="40.0" top="40.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
                     </tabs>
                   </TabPane>
                </children>

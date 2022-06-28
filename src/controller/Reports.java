@@ -1,6 +1,9 @@
 package controller;
 
 import DBQuery.AppointmentQuery;
+import DBQuery.CountryQuery;
+import DBQuery.CustomerQuery;
+import DBQuery.DivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,13 +12,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.Country;
+import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -67,6 +74,54 @@ public class Reports implements Initializable {
     private ComboBox<String> scheduleByContactCombo;
 
     @FXML
+    private TableColumn<Appointment, Integer> scheduleByContactApptIDCol;
+
+    @FXML
+    private TableColumn<Appointment, Integer> scheduleByContactCustIDCol;
+
+    @FXML
+    private TableColumn<Appointment, String> scheduleByContactDescriptionCol;
+
+    @FXML
+    private TableColumn<Appointment, LocalDateTime> scheduleByContactEndCol;
+
+    @FXML
+    private TableColumn<Appointment, LocalDateTime> scheduleByContactStartCol;
+
+    @FXML
+    private TableView<Appointment> scheduleByContactTableView;
+
+    @FXML
+    private TableColumn<Appointment, String> scheduleByContactTitleCol;
+
+    @FXML
+    private TableColumn<Appointment, String> scheduleByContactTypeCol;
+
+    @FXML
+    private TableColumn<Customer, String> customersByDivisionAddressCol;
+
+    @FXML
+    private ComboBox<String> customersByDivisionCountryCombo;
+
+    @FXML
+    private TableColumn<Customer, Integer> customersByDivisionCustIDCol;
+
+    @FXML
+    private TableColumn<Customer, String> customersByDivisionCustNameCol;
+
+    @FXML
+    private ComboBox<String> customersByDivisionDivisionCombo;
+
+    @FXML
+    private TableColumn<Customer, String> customersByDivisionPhoneNumberCol;
+
+    @FXML
+    private TableColumn<Customer, String> customersByDivisionPostalCodeCol;
+
+    @FXML
+    private TableView<Customer> customersByDivisionTableView;
+
+    @FXML
     void onActionTypeSelected(ActionEvent event) {
 
         String type = totalAppointmentTabTypeCombo.getValue();
@@ -88,6 +143,16 @@ public class Reports implements Initializable {
     @FXML
     void onActionContactSelected(ActionEvent event) {
 
+        String chosenContact = scheduleByContactCombo.getValue();
+
+        ObservableList<Appointment> apptList = AppointmentQuery.getAllAppointments().stream()
+                .filter((appt) -> appt.getContact().equals(chosenContact))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        scheduleByContactTableView.setItems(apptList);
+
+
+
     }
 
 
@@ -98,6 +163,32 @@ public class Reports implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+
+    }
+
+    @FXML
+    void onActionCountrySelected(ActionEvent event) {
+
+        String countryName = customersByDivisionCountryCombo.getValue();
+
+        ObservableList<String> divisionList = CustomerQuery.getAllCustomers().stream()
+                .filter((item) -> item.getCountryName().equals(countryName))
+                .map((item) -> item.getDivisionName())
+                .distinct()
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        customersByDivisionDivisionCombo.setItems(divisionList);
+
+    }
+
+    @FXML
+    void onActionDivisionSelected(ActionEvent event) {
+
+        String divisionName = customersByDivisionDivisionCombo.getValue();
+
+        customersByDivisionTableView.setItems(CustomerQuery.getAllCustomers().stream()
+                .filter((item) -> item.getDivisionName().equals(divisionName))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
 
     }
 
@@ -123,6 +214,29 @@ public class Reports implements Initializable {
         if(!contactList.isEmpty()) {
             scheduleByContactCombo.setItems(contactList);
         }
+
+        scheduleByContactApptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        scheduleByContactTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        scheduleByContactTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        scheduleByContactDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        scheduleByContactStartCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        scheduleByContactEndCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        scheduleByContactCustIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        ObservableList<String> countryList = CustomerQuery.getAllCustomers().stream()
+                .map((country) -> country.getCountryName())
+                .distinct()
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        customersByDivisionCountryCombo.setItems(countryList);
+
+        customersByDivisionCustIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customersByDivisionCustNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customersByDivisionAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        customersByDivisionPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        customersByDivisionPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+
+
 
     }
 
