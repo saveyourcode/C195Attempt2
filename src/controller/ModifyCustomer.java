@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/** CLass that holds all of the methods that control the modify customer view.*/
 public class ModifyCustomer implements Initializable {
 
     private Stage stage;
@@ -50,6 +51,7 @@ public class ModifyCustomer implements Initializable {
     @FXML
     private TextField modifyCustomerPostalCodeText;
 
+    /** Returns the user to the Startpage when pressed.*/
     @FXML
     void onActionModifyCustomerCancel(ActionEvent event) throws IOException {
 
@@ -60,6 +62,8 @@ public class ModifyCustomer implements Initializable {
 
     }
 
+    /** An existing customer's information is updated in the database using the information that the user has inputted
+     * in the combo boxes and text fields.*/
     @FXML
     void onActionModifyCustomerSave(ActionEvent event) throws IOException {
 
@@ -83,11 +87,6 @@ public class ModifyCustomer implements Initializable {
             e.printStackTrace();
         }
 
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
     @Override
@@ -95,6 +94,8 @@ public class ModifyCustomer implements Initializable {
 
     }
 
+    /** The customer that is chosen to be modified is sent to the modify customer view from the start page and
+     * the customer's data is used to populate the combo boxes and text fields.*/
     public void transferCustomer(Customer customer) {
 
         modifyCustomerIDText.setText(String.valueOf(customer.getCustomerId()));
@@ -131,6 +132,8 @@ public class ModifyCustomer implements Initializable {
 
     }
 
+    /** When a country is selected the division combo box is populated with only the divisions that are in the
+     * selected country.*/
     @FXML
     void onActionCountrySelected(ActionEvent event) {
 

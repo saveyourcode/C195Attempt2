@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/** Class that contains the methods for connecting to a database using JDBC.*/
 public abstract class DBConnection {
 
     private static final String databaseName = "client_schedule";
@@ -13,6 +14,7 @@ public abstract class DBConnection {
     private static final String password = "Passw0rd!";
     static Connection conn;
 
+    /** Establishes a connection with the database.*/
     public static void makeConnection() {
         try {
             conn = (Connection) DriverManager.getConnection(DB_URL, username, password);
@@ -25,10 +27,12 @@ public abstract class DBConnection {
 
     }
 
+    /** Returns the connection to the database.*/
     public static Connection getConnection() {
         return conn;
     }
 
+    /** Closes the connection to the database.*/
     public static void closeConnection() {
         try {
             conn.close();

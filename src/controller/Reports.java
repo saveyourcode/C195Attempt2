@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/** CLass that holds all of the methods that control the reports view.*/
 public class Reports implements Initializable {
 
     private Parent scene;
@@ -121,6 +122,8 @@ public class Reports implements Initializable {
     @FXML
     private TableView<Customer> customersByDivisionTableView;
 
+    /** The meeting total based on meeting type and month is displayed when a meeting type is chosen from the
+     * combo box.*/
     @FXML
     void onActionTypeSelected(ActionEvent event) {
 
@@ -140,6 +143,7 @@ public class Reports implements Initializable {
 
     }
 
+    /** When a contact is chosen the table view is populated with all the meetings associated with the contact.*/
     @FXML
     void onActionContactSelected(ActionEvent event) {
 
@@ -156,6 +160,7 @@ public class Reports implements Initializable {
     }
 
 
+    /** Returns the user to the Startpage when pressed.*/
     @FXML
     void onActionReturnToStartPage(ActionEvent event) throws IOException {
 
@@ -166,6 +171,8 @@ public class Reports implements Initializable {
 
     }
 
+    /** When a country is selected, the division combo box is populated with only the divisions that exist within that
+     * country and currently are associated with a customer.*/
     @FXML
     void onActionCountrySelected(ActionEvent event) {
 
@@ -181,6 +188,8 @@ public class Reports implements Initializable {
 
     }
 
+    /** When a division is selected the table view is populated with the information of all the customers that live
+     * in the selected division*/
     @FXML
     void onActionDivisionSelected(ActionEvent event) {
 
@@ -193,6 +202,9 @@ public class Reports implements Initializable {
     }
 
 
+    /** When the reports view is loaded the type and contact combo boxes are populated with the types and contacts
+     *  associated with all the meetings and the country combo box is populated with the countries associated with all
+     *  the customers. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -240,6 +252,8 @@ public class Reports implements Initializable {
 
     }
 
+    /** Takes the type and month of a meeting as a parameter and returns the count of the meetings matching the
+     *  parameters*/
     public long returnCountForTypeAndMonth(String type, int month) {
 
         long count = AppointmentQuery.getAllAppointments().stream()

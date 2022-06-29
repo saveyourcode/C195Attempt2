@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/** CLass that holds all of the methods that control the start page view.*/
 public class StartPage implements Initializable {
 
     private Parent scene;
@@ -88,6 +89,7 @@ public class StartPage implements Initializable {
     @FXML
     private TableColumn<Customer, String> startPageCustomersTableViewPostalCodeCol;
 
+    /** When selected the appointments table view is populated with all the available appointments.*/
     @FXML
     void onActionStartPageAllRadioButton(ActionEvent event) {
 
@@ -95,6 +97,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** When selected the user is taken to the add appointment page.*/
     @FXML
     void onActionStartPageAppointmentsAdd(ActionEvent event) throws IOException {
 
@@ -105,6 +108,8 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Asks the user if they would like to delete the selected appointment and if they confirm then the selected
+     * appointment is deleted and a message is displayed with the deleted appointments ID and type.*/
     @FXML
     void onActionStartPageAppointmentsDelete(ActionEvent event) {
 
@@ -128,6 +133,8 @@ public class StartPage implements Initializable {
 
     }
 
+    /** If an appointment is selected it takes the user and the selected appointment object to the modify appointment
+     * page.*/
     @FXML
     void onActionStartPageAppointmentsModify(ActionEvent event) throws IOException {
 
@@ -146,13 +153,9 @@ public class StartPage implements Initializable {
             stage.show();
         }
 
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
+    /** Takes the user to the add customer page.*/
     @FXML
     void onActionStartPageCustomerAdd(ActionEvent event) throws IOException {
 
@@ -163,6 +166,9 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Asks the user if they would like to delete the selected customer and if they confirm then the selected
+     * customer's appointments are deleted and then the customer is deleted followed by a message that displays the
+     * deleted customer's name.*/
     @FXML
     void onActionStartPageCustomerDelete(ActionEvent event) {
 
@@ -192,6 +198,8 @@ public class StartPage implements Initializable {
 
     }
 
+    /** If pressed when a customer is selected, the user is taken to the modify customer page where they can change
+     * an existing customer's data.*/
     @FXML
     void onActionStartPageCustomerModify(ActionEvent event) throws IOException {
 
@@ -218,6 +226,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Ends the program.*/
     @FXML
     void onActionStartPageExit(ActionEvent event) {
 
@@ -227,6 +236,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Returns the user to the login page.*/
     @FXML
     void onActionStartPageLogOut(ActionEvent event) throws IOException {
 
@@ -237,6 +247,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Displays the appointments that have a start time within the next month.*/
     @FXML
     void onActionStartPageMonthRadioButton(ActionEvent event) {
 
@@ -248,6 +259,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** When pressed, takes the user to the reports page.*/
     @FXML
     void onActionStartPageReports(ActionEvent actionEvent) {
 
@@ -266,6 +278,7 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Displays the appointments that have a start time within the next week.*/
     @FXML
     void onActionStartPageWeekRadioButton(ActionEvent event) {
 
@@ -277,6 +290,8 @@ public class StartPage implements Initializable {
 
     }
 
+    /** Upon the start page being loaded, the customer and appointment table views are set up and populated with all
+     * of the customers and appointments respectively.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -305,6 +320,8 @@ public class StartPage implements Initializable {
 
     }
 
+    /** When a user first logs in a message is displayed telling them if any meetings are starting within the next
+     * fifteen minutes.*/
     public void transferFromLogin() {
 
         LocalDateTime now = LocalDateTime.now();

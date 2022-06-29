@@ -30,6 +30,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
+/** CLass that holds all of the methods that control the modify appointment view.*/
 public class ModifyAppointment implements Initializable {
 
     private Stage stage;
@@ -71,6 +72,7 @@ public class ModifyAppointment implements Initializable {
     @FXML
     private DatePicker modifyAppointmentDatePicker;
 
+    /** Returns the user to the Startpage when pressed.*/
     @FXML
     void onActionModifyAppointmentCancel(ActionEvent event) throws IOException {
 
@@ -81,6 +83,8 @@ public class ModifyAppointment implements Initializable {
 
     }
 
+    /** Creates an appointment object that has its time checked to see if it's within business hours and doesn't overlap
+     * with an existing meeting before updating an appointment in the database.*/
     @FXML
     void onActionModifyAppointmentSave(ActionEvent event) throws IOException {
 
@@ -141,11 +145,6 @@ public class ModifyAppointment implements Initializable {
             e.printStackTrace();
         }
 
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
     @Override
@@ -153,6 +152,8 @@ public class ModifyAppointment implements Initializable {
 
     }
 
+    /** The appointment that is chosen to be modified is sent to the modify appointment view from the start page and
+     * the appointment's data is used to populate the combo boxes and text fields.*/
     public void transferAppointment(Appointment appointment) {
 
         modifyAppointmentTitleText.setText(appointment.getTitle());
