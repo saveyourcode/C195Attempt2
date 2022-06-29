@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/** CLass that holds all of the methods that control the add customer view.*/
 public class AddCustomer implements Initializable {
 
     private Stage stage;
@@ -49,6 +50,7 @@ public class AddCustomer implements Initializable {
     @FXML
     private TextField addCustomerPostalCodeText;
 
+    /** Returns the user to the Startpage when pressed.*/
     @FXML
     void onActionAddCustomerCancel(ActionEvent event) throws IOException {
 
@@ -59,6 +61,7 @@ public class AddCustomer implements Initializable {
 
     }
 
+    /** Collects data input by the user to add a new customer to the database*/
     @FXML
     void onActionAddCustomerSave(ActionEvent event) throws IOException {
 
@@ -83,13 +86,10 @@ public class AddCustomer implements Initializable {
             e.printStackTrace();
         }
 
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
+    /** When the add customer view is loaded the country and division combo box are populated with all of the
+     * available countries and divisions respectively.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -99,6 +99,8 @@ public class AddCustomer implements Initializable {
 
     }
 
+    /** When a country is selected in the country combo box the division combo box is populated with only the divisions
+     * that are located in the selected country.*/
     @FXML
     void onActionCountrySelected(ActionEvent event) {
 

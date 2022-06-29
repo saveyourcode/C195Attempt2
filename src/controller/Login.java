@@ -25,6 +25,7 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/** CLass that holds all of the methods that control the login view.*/
 public class Login implements Initializable {
 
     private Stage stage;
@@ -55,6 +56,8 @@ public class Login implements Initializable {
     @FXML
     private Label loginZoneIdText;
 
+    /** Takes the user inputted username and queries the database to chekc if the the username and password match, and
+     * if they match it loads the Startpage, if they don't match it displays an error message. */
     @FXML
     void onActionLoginButton(ActionEvent event) throws IOException {
 
@@ -77,10 +80,6 @@ public class Login implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
 
-//            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//            scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//            stage.setScene(new Scene(scene));
-//            stage.show();
 
         } else {
 
@@ -89,15 +88,9 @@ public class Login implements Initializable {
             AlertMessages.errorAlert(bundle.getString("errorHead"), bundle.getString("errorBody"));
         }
 
-
-
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
+    /** Translates all text in the login screen to the appropriate language based on the user's location.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -116,6 +109,7 @@ public class Login implements Initializable {
 
     }
 
+    /** Writes the username, date, time, and whether the login was successful or not to a file when a user attempts to login.*/
     public void recordLoginActivity(String username, String successfulOrNot) {
 
         try {

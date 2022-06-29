@@ -31,6 +31,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
+/** Class that holds all of the methods that control the add appointment view.*/
 public class AddAppointment implements Initializable {
 
     private Stage stage;
@@ -66,12 +67,11 @@ public class AddAppointment implements Initializable {
     @FXML
     private ComboBox<User> addAppointmentUserIDCombo;
 
-    @FXML
-    private TextField addAppointmentDateText;
 
     @FXML
     private DatePicker addAppointmentDatePicker;
 
+    /** Returns the user to the Startpage when pressed.*/
     @FXML
     void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
 
@@ -82,6 +82,8 @@ public class AddAppointment implements Initializable {
 
     }
 
+    /** Collects all of the data inputted by the user and creates a Appointment object that is checked for appointment
+     * time overlaps and if the appointment is within business hours before adding the appointment to the database.*/
     @FXML
     void onActionAddAppointmentSave(ActionEvent event) throws IOException {
 
@@ -137,13 +139,10 @@ public class AddAppointment implements Initializable {
             e.printStackTrace();
         }
 
-//        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-//        scene = FXMLLoader.load(getClass().getResource("/view/StartPage.fxml"));
-//        stage.setScene(new Scene(scene));
-//        stage.show();
-
     }
 
+    /** When the add appointment view is loaded the contacts, customer, and user combo boxes are populated with data
+     * and the current date is set as the datepicker's value.*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
