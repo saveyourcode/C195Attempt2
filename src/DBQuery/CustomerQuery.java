@@ -12,8 +12,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/** Class that holds the methods that query the customers table in the database.*/
 public abstract class CustomerQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the customers table.*/
     public static ObservableList<Customer> getAllCustomers() {
 
         ObservableList<Customer> returnedList = FXCollections.observableArrayList();
@@ -48,6 +50,7 @@ public abstract class CustomerQuery {
 
     }
 
+    /** Inserts a new customer entry into the customers table.*/
     public static int insertCustomer(String customerName, String address, String postalCode,
                                      String phoneNumber, int divisionId) {
         try {
@@ -70,6 +73,7 @@ public abstract class CustomerQuery {
         return -1;
     }
 
+    /** Updates the information of an existing entry in the customers table.*/
     public static int updateCustomer(int customerId, String customerName, String address, String postalCode,
                                      String phoneNumber, int divisionId) {
 
@@ -93,6 +97,7 @@ public abstract class CustomerQuery {
         return -1;
     }
 
+    /** Deletes an appointment with the matching appointment id from the customers table.*/
     public static int deleteCustomer(int customerId) {
 
         try {

@@ -10,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Class that holds the methods that query the users table in the database.*/
 public abstract class UserQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the users table.*/
     public static ObservableList<User> getAllUsers() {
 
         ObservableList<User> returnedList = FXCollections.observableArrayList();
@@ -36,6 +38,7 @@ public abstract class UserQuery {
 
     }
 
+    /** Returns the password that matches the username that is passed as a parameter.*/
     public static String getPassword(String username) {
 
         try {

@@ -11,8 +11,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/** Class that holds the methods that query the appointments table in the database.*/
 public abstract class AppointmentQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the appointments table.*/
     public static ObservableList<Appointment> getAllAppointments() {
 
         ObservableList<Appointment> resultsList = FXCollections.observableArrayList();
@@ -53,6 +55,7 @@ public abstract class AppointmentQuery {
 
     }
 
+    /** Inserts a new appointment entry into the appointments table.*/
     public static int insertAppointment(String title, String description, String location, String type,
                                         LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
 
@@ -80,6 +83,7 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
+    /** Updates the information of an existing entry in the appointments table.*/
     public static int updateAppointment(String title, String description, String location, String type,
                                         LocalDateTime start, LocalDateTime end, int customerId, int userId,
                                         int contactId, int appointmentId) {
@@ -108,6 +112,7 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
+    /** Deletes an appointment with the matching appointment id from the appointments table.*/
     public static int deleteAppointment(int appointmentId) {
 
         try {

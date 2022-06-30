@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Class that holds the methods that query the countries table in the database.*/
 public abstract class CountryQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the countries table.*/
     public static ObservableList<Country> getAllCountries() {
 
         ObservableList<Country> returnedList = FXCollections.observableArrayList();
@@ -36,6 +38,7 @@ public abstract class CountryQuery {
         return returnedList;
     }
 
+    /** Returns the country name that matches the country id that is passed as a parameter.*/
     public static String getCountryName(int countryId) {
 
         try {

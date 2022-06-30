@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Class that holds the methods that query the first_level_divisions table in the database.*/
 public abstract class DivisionQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the first_level_divisions table.*/
     public static ObservableList<Division> getAllDivisions() {
 
         ObservableList<Division> returnedList = FXCollections.observableArrayList();
@@ -35,6 +37,7 @@ public abstract class DivisionQuery {
 
     }
 
+    /** Returns the division name that matches the division id that is passed as a parameter.*/
     public static String getDivisionName(int divisionId) {
 
         try {
@@ -55,6 +58,7 @@ public abstract class DivisionQuery {
 
     }
 
+    /** Returns the division id that matches the division name that is passed as a parameter.*/
     public static int getDivisionId(String divisionName) throws SQLException {
 
         String sql = "SELECT Division_ID FROM first_level_divisions Where Division = ?";

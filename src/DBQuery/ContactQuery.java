@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Class that holds the methods that query the contacts table in the database.*/
 public abstract class ContactQuery {
 
+    /** Returns an observable list containing objects that hold all the information for the contacts table.*/
     public static ObservableList<Contact> getAllContacts() {
 
         ObservableList<Contact> returnedList = FXCollections.observableArrayList();
@@ -35,6 +37,7 @@ public abstract class ContactQuery {
 
     }
 
+    /** Returns the Contact id that matches the contact name that is passed as a parameter.*/
     public static int getContactId(String contactName) {
 
         try {
