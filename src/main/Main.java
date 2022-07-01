@@ -18,6 +18,11 @@ import java.time.ZoneId;
 public class Main extends Application {
 
     /** Loads the login screen when the program starts.*/
+    /**
+     *
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
@@ -27,6 +32,10 @@ public class Main extends Application {
 
     /** When the program starts it makes a connection with the database, calls the method to load the login screen,
      * and when the program ends it closes the connection with the database.*/
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         DBConnection.makeConnection();

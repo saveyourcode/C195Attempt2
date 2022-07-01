@@ -5,16 +5,27 @@ import javafx.scene.control.ButtonType;
 
 import java.util.Optional;
 
+/** Class that holds the static methods for creating alert windows. */
 public class AlertMessages {
 
     private static Alert alert;
 
+    /** Creates a warning message window.*/
+    /**
+     *
+     * @param text message displayed in the body
+     */
     public static void warningAlert(String text) {
         alert = new Alert(Alert.AlertType.WARNING);
         alert.setContentText(text);
         alert.showAndWait();
     }
 
+    /** Creates an error message window*/
+    /**
+     *
+     * @param text message displayed in body
+     */
     public static void errorAlert(String text) {
 
         alert = new Alert(Alert.AlertType.ERROR);
@@ -22,6 +33,12 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    /** Creates an error message window.*/
+    /**
+     *
+     * @param head message displayed in header
+     * @param body message displayed in body
+     */
     public static void errorAlert(String head, String body) {
 
         alert = new Alert(Alert.AlertType.ERROR);
@@ -37,6 +54,12 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    /** Creates an information message window.*/
+    /**
+     *
+     * @param head message displayed in the header
+     * @param body message displayed in the body
+     */
     public static void informationAlert(String head, String body) {
 
         alert = new Alert(Alert.AlertType.INFORMATION);
@@ -45,6 +68,12 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    /** Creates a confirmation window and records the users choice*/
+    /**
+     *
+     * @param text message that will be displayed
+     * @return boolean
+     */
     public static boolean confirmationAlert(String text) {
 
         alert = new Alert(Alert.AlertType.CONFIRMATION);

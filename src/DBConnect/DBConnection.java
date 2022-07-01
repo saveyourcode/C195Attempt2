@@ -9,7 +9,7 @@ public abstract class DBConnection {
 
     private static final String databaseName = "client_schedule";
     // might need to add "?connectionTimeZone = SERVER" at the end of DB_URL
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/"+databaseName;
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/"+databaseName + "?connectionTimeZone = SERVER";
     private static final String username = "sqlUser";
     private static final String password = "Passw0rd!";
     static Connection conn;
