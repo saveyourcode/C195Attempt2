@@ -10,7 +10,12 @@ public class Helper {
     public static ZoneId zoneEST = ZoneId.of("America/New_York");
     public static ZoneId zoneDefault = ZoneId.systemDefault();
 
-    /** Returns a boolean value depending on if the username and password matches.*/
+    /** Returns a boolean value depending on if the username and password matches.
+     *
+     * @param username String username
+     * @param password String password
+     * @return True if username and password match in the database and false if they do not
+     */
     public static boolean checkPassword(String username, String password) {
 
         if (UserQuery.getPassword(username).equals(password)) {
@@ -22,6 +27,11 @@ public class Helper {
     }
 
     /** Returns a boolean value depending on if the appointment parameter is inside of business hours.*/
+    /**
+     *
+     * @param localDateTime the time to be checked if it's within business hours
+     * @return True if time is within business hours and false if it's not
+     */
     public static boolean checkIfWithinBusinessHours(LocalDateTime localDateTime) {
 
         LocalTime openingTime = LocalTime.of(8, 00);

@@ -182,6 +182,13 @@ public class Reports implements Initializable {
     /** When a country is selected, the division combo box is populated with only the divisions that exist within that
      * country and currently are associated with a customer.
      *
+     * <p>This method contains a lambda expression that returns an observable list containing a list of the unique
+     * instances of countries related to all customers. It first filters all customers for those that match
+     * the country selected in the combo box.  It then maps the list of objects to a list of country name strings.
+     * Finally it removes repeated instances of country names so only a list of unique country names is returned.
+     * This is used to fill the country combo box with only countries that are associated with an existing customer
+     * as opposed to filling it with every country option.</p>
+     *
      * @param event item in country combo box being selected
      */
     @FXML
@@ -273,9 +280,16 @@ public class Reports implements Initializable {
     /** Takes the type and month of a meeting as a parameter and returns the count of the meetings matching the
      *  parameters.
      *
+     *  <p>This method contains a lambda expression that filters a list of all appointments and returns the count of
+     *  appointments that have a type and occur in the month that matches the parameters. First it filters the list
+     *  of all appointments to get a list of appointments with a type that matches the type parameter.  It then filters
+     *  the list to get appointments that match the integer month parameter and returns a count of the appointments
+     *  in the list.  This is used to populate the total appointments by type and month reports page with the
+     *  necessary data.  </p>
+     *
      * @param type meeting type
      * @param month month represented as an integer
-     * @return long
+     * @return long number of appointments that match the criteria
      */
     public long returnCountForTypeAndMonth(String type, int month) {
 

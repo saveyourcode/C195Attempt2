@@ -10,8 +10,7 @@ public class AlertMessages {
 
     private static Alert alert;
 
-    /** Creates a warning message window.*/
-    /**
+    /** Creates a warning message window.
      *
      * @param text message displayed in the body
      */
@@ -21,8 +20,7 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
-    /** Creates an error message window*/
-    /**
+    /** Creates an error message window.
      *
      * @param text message displayed in body
      */
@@ -33,8 +31,7 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
-    /** Creates an error message window.*/
-    /**
+    /** Creates an error message window.
      *
      * @param head message displayed in header
      * @param body message displayed in body
@@ -54,8 +51,7 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
-    /** Creates an information message window.*/
-    /**
+    /** Creates an information message window.
      *
      * @param head message displayed in the header
      * @param body message displayed in the body
@@ -68,8 +64,7 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
-    /** Creates a confirmation window and records the users choice*/
-    /**
+    /** Creates a confirmation window and records the users choice.
      *
      * @param text message that will be displayed
      * @return boolean
