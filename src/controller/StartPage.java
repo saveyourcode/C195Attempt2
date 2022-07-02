@@ -393,7 +393,8 @@ public class StartPage implements Initializable {
             String message = "";
             for(Appointment appt: appointmentList) {
 
-                message += ("Appointment ID: " + appt.getAppointmentId() + " is at " + appt.getStartTime().toLocalTime() + "\n");
+                message += ("Appointment ID: " + appt.getAppointmentId() + " is at " + appt.getStartTime().toLocalTime() +
+                        " on " + appt.getStartTime().toLocalDate() + "\n");
 
             }
 
