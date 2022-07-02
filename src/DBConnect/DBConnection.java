@@ -14,7 +14,9 @@ public abstract class DBConnection {
     private static final String password = "Passw0rd!";
     static Connection conn;
 
-    /** Establishes a connection with the database.*/
+    /** Establishes a connection with the database.
+     *
+     */
     public static void makeConnection() {
         try {
             conn = (Connection) DriverManager.getConnection(DB_URL, username, password);

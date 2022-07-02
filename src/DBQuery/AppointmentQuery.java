@@ -14,7 +14,10 @@ import java.time.LocalDateTime;
 /** Class that holds the methods that query the appointments table in the database.*/
 public abstract class AppointmentQuery {
 
-    /** Returns an observable list containing objects that hold all the information for the appointments table.*/
+    /** Returns an observable list containing objects that hold all the information for the appointments table.
+     *
+     * @return an observable list of appointment objects
+     */
     public static ObservableList<Appointment> getAllAppointments() {
 
         ObservableList<Appointment> resultsList = FXCollections.observableArrayList();
@@ -55,7 +58,19 @@ public abstract class AppointmentQuery {
 
     }
 
-    /** Inserts a new appointment entry into the appointments table.*/
+    /** Inserts a new appointment entry into the appointments table.
+     *
+     * @param title String title
+     * @param description String description
+     * @param location String Location
+     * @param type String type
+     * @param start LocalDateTime start
+     * @param end LocalDateTime end
+     * @param customerId int customerId
+     * @param userId int userId
+     * @param contactId int contactId
+     * @return the number of row affected
+     */
     public static int insertAppointment(String title, String description, String location, String type,
                                         LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
 
@@ -83,7 +98,20 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
-    /** Updates the information of an existing entry in the appointments table.*/
+    /** Updates the information of an existing entry in the appointments table.
+     *
+     * @param title String title
+     * @param description String description
+     * @param location String location
+     * @param type String type
+     * @param start LocalDateTime start
+     * @param end LocalDateTime end
+     * @param customerId int customerId
+     * @param userId int userId
+     * @param contactId int contactId
+     * @param appointmentId int appointmentId
+     * @return the number of items in the database that were affected
+     */
     public static int updateAppointment(String title, String description, String location, String type,
                                         LocalDateTime start, LocalDateTime end, int customerId, int userId,
                                         int contactId, int appointmentId) {
@@ -112,7 +140,11 @@ public abstract class AppointmentQuery {
         return -1;
     }
 
-    /** Deletes an appointment with the matching appointment id from the appointments table.*/
+    /** Deletes an appointment with the matching appointment id from the appointments table.
+     *
+     * @param appointmentId the id of the appointment that is deleted
+     * @return the number of rows affected
+     */
     public static int deleteAppointment(int appointmentId) {
 
         try {

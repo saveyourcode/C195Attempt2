@@ -50,7 +50,11 @@ public class AddCustomer implements Initializable {
     @FXML
     private TextField addCustomerPostalCodeText;
 
-    /** Returns the user to the Startpage when pressed.*/
+    /** Returns the user to the Startpage when pressed.
+     *
+     * @param event the cancel button is pressed
+     * @throws IOException the startpage view file fails to load
+     */
     @FXML
     void onActionAddCustomerCancel(ActionEvent event) throws IOException {
 
@@ -61,13 +65,21 @@ public class AddCustomer implements Initializable {
 
     }
 
-    /** Collects data input by the user to add a new customer to the database*/
+    /** Collects data input by the user to add a new customer to the database.
+     *
+     * @param event the add button is pressed
+     * @throws IOException the startpage view file fails to load
+     */
     @FXML
     void onActionAddCustomerSave(ActionEvent event) throws IOException {
 
         try {
 
             String customerName = addCustomerNameText.getText();
+            if (customerName.isEmpty()) {
+                AlertMessages.warningAlert("The customer name field is empty.");
+                return;
+            }
             String address = addCustomerAddressText.getText();
             String postalCode = addCustomerPostalCodeText.getText();
             String phoneNumber = addCustomerPhoneNumberText.getText();
@@ -89,7 +101,11 @@ public class AddCustomer implements Initializable {
     }
 
     /** When the add customer view is loaded the country and division combo box are populated with all of the
-     * available countries and divisions respectively.*/
+     * available countries and divisions respectively.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -100,7 +116,10 @@ public class AddCustomer implements Initializable {
     }
 
     /** When a country is selected in the country combo box the division combo box is populated with only the divisions
-     * that are located in the selected country.*/
+     * that are located in the selected country.
+     *
+     * @param event a country is selected in the country combo box
+     */
     @FXML
     void onActionCountrySelected(ActionEvent event) {
 

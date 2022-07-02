@@ -12,7 +12,10 @@ import java.sql.SQLException;
 /** Class that holds the methods that query the countries table in the database.*/
 public abstract class CountryQuery {
 
-    /** Returns an observable list containing objects that hold all the information for the countries table.*/
+    /** Returns an observable list containing objects that hold all the information for the countries table.
+     *
+     * @return an observable list of country objects
+     */
     public static ObservableList<Country> getAllCountries() {
 
         ObservableList<Country> returnedList = FXCollections.observableArrayList();
@@ -38,7 +41,11 @@ public abstract class CountryQuery {
         return returnedList;
     }
 
-    /** Returns the country name that matches the country id that is passed as a parameter.*/
+    /** Returns the country name that matches the country id that is passed as a parameter.
+     *
+     * @param countryId int countryId
+     * @return String countryName that matches the countryId
+     */
     public static String getCountryName(int countryId) {
 
         try {

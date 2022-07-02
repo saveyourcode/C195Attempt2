@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
 import model.Division;
+import utility.AlertMessages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,7 +52,11 @@ public class ModifyCustomer implements Initializable {
     @FXML
     private TextField modifyCustomerPostalCodeText;
 
-    /** Returns the user to the Startpage when pressed.*/
+    /** Returns the user to the Startpage when pressed.
+     *
+     * @param event the cancel button is pressed
+     * @throws IOException the startpage file view fails to load
+     */
     @FXML
     void onActionModifyCustomerCancel(ActionEvent event) throws IOException {
 
@@ -63,7 +68,11 @@ public class ModifyCustomer implements Initializable {
     }
 
     /** An existing customer's information is updated in the database using the information that the user has inputted
-     * in the combo boxes and text fields.*/
+     * in the combo boxes and text fields.
+     *
+     * @param event the save button is pressed
+     * @throws IOException if the startpage file view fails to load
+     */
     @FXML
     void onActionModifyCustomerSave(ActionEvent event) throws IOException {
 
@@ -71,6 +80,10 @@ public class ModifyCustomer implements Initializable {
 
             int customerId = Integer.parseInt(modifyCustomerIDText.getText());
             String customerName = modifyCustomerNameText.getText();
+            if (customerName.isEmpty()) {
+                AlertMessages.warningAlert("The name customer field is empty.");
+                return;
+            }
             String address = modifyCustomerAddressText.getText();
             String postalCode = modifyCustomerPostalCodeText.getText();
             String phoneNumber = modifyCustomerPhoneNumberText.getText();
@@ -95,7 +108,10 @@ public class ModifyCustomer implements Initializable {
     }
 
     /** The customer that is chosen to be modified is sent to the modify customer view from the start page and
-     * the customer's data is used to populate the combo boxes and text fields.*/
+     * the customer's data is used to populate the combo boxes and text fields.
+     *
+     * @param customer the customer object that was chosen from the customer tableview on the startpage
+     */
     public void transferCustomer(Customer customer) {
 
         modifyCustomerIDText.setText(String.valueOf(customer.getCustomerId()));
@@ -133,7 +149,10 @@ public class ModifyCustomer implements Initializable {
     }
 
     /** When a country is selected the division combo box is populated with only the divisions that are in the
-     * selected country.*/
+     * selected country.
+     *
+     * @param event a country is selected in the country combo box
+     */
     @FXML
     void onActionCountrySelected(ActionEvent event) {
 

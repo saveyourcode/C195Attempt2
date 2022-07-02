@@ -72,7 +72,11 @@ public class ModifyAppointment implements Initializable {
     @FXML
     private DatePicker modifyAppointmentDatePicker;
 
-    /** Returns the user to the Startpage when pressed.*/
+    /** Returns the user to the Startpage when pressed.
+     *
+     * @param event the cancel button is pressed
+     * @throws IOException if the startpage view file fails to load
+     */
     @FXML
     void onActionModifyAppointmentCancel(ActionEvent event) throws IOException {
 
@@ -84,7 +88,11 @@ public class ModifyAppointment implements Initializable {
     }
 
     /** Creates an appointment object that has its time checked to see if it's within business hours and doesn't overlap
-     * with an existing meeting before updating an appointment in the database.*/
+     * with an existing meeting before updating an appointment in the database.
+     *
+     * @param event the save button is pressed
+     * @throws IOException if the startpage view fails to load
+     */
     @FXML
     void onActionModifyAppointmentSave(ActionEvent event) throws IOException {
 
@@ -153,7 +161,10 @@ public class ModifyAppointment implements Initializable {
     }
 
     /** The appointment that is chosen to be modified is sent to the modify appointment view from the start page and
-     * the appointment's data is used to populate the combo boxes and text fields.*/
+     * the appointment's data is used to populate the combo boxes and text fields.
+     *
+     * @param appointment the appointment object chosen for the appointment tableview on the startpage
+     */
     public void transferAppointment(Appointment appointment) {
 
         modifyAppointmentTitleText.setText(appointment.getTitle());

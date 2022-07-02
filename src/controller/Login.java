@@ -57,7 +57,11 @@ public class Login implements Initializable {
     private Label loginZoneIdText;
 
     /** Takes the user inputted username and queries the database to chekc if the the username and password match, and
-     * if they match it loads the Startpage, if they don't match it displays an error message. */
+     * if they match it loads the Startpage, if they don't match it displays an error message.
+     *
+     * @param event the login button is pressed
+     * @throws IOException the startpage view file fails to load
+     */
     @FXML
     void onActionLoginButton(ActionEvent event) throws IOException {
 
@@ -90,7 +94,11 @@ public class Login implements Initializable {
 
     }
 
-    /** Translates all text in the login screen to the appropriate language based on the user's location.*/
+    /** Translates all text in the login screen to the appropriate language based on the user's location.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -109,7 +117,11 @@ public class Login implements Initializable {
 
     }
 
-    /** Writes the username, date, time, and whether the login was successful or not to a file when a user attempts to login.*/
+    /** Writes the username, date, time, and whether the login was successful or not to a file when a user attempts to login.
+     *
+     * @param username the username
+     * @param successfulOrNot a message saying if login attempt was successful or not
+     */
     public void recordLoginActivity(String username, String successfulOrNot) {
 
         try {

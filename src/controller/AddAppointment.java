@@ -71,7 +71,11 @@ public class AddAppointment implements Initializable {
     @FXML
     private DatePicker addAppointmentDatePicker;
 
-    /** Returns the user to the Startpage when pressed.*/
+    /** Returns the user to the Startpage when pressed.
+     *
+     * @param event the cancel button is pressed
+     * @throws IOException the startpage view file fails to load
+     */
     @FXML
     void onActionAddAppointmentCancel(ActionEvent event) throws IOException {
 
@@ -83,7 +87,11 @@ public class AddAppointment implements Initializable {
     }
 
     /** Collects all of the data inputted by the user and creates a Appointment object that is checked for appointment
-     * time overlaps and if the appointment is within business hours before adding the appointment to the database.*/
+     * time overlaps and if the appointment is within business hours before adding the appointment to the database.
+     *
+     * @param event the add button is pressed
+     * @throws IOException is the startpage view file fails to load
+     */
     @FXML
     void onActionAddAppointmentSave(ActionEvent event) throws IOException {
 
@@ -142,7 +150,11 @@ public class AddAppointment implements Initializable {
     }
 
     /** When the add appointment view is loaded the contacts, customer, and user combo boxes are populated with data
-     * and the current date is set as the datepicker's value.*/
+     * and the current date is set as the datepicker's value.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

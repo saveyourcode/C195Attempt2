@@ -15,7 +15,10 @@ import java.time.LocalDateTime;
 /** Class that holds the methods that query the customers table in the database.*/
 public abstract class CustomerQuery {
 
-    /** Returns an observable list containing objects that hold all the information for the customers table.*/
+    /** Returns an observable list containing objects that hold all the information for the customers table.
+     *
+     * @return an observable list of customer objects
+     */
     public static ObservableList<Customer> getAllCustomers() {
 
         ObservableList<Customer> returnedList = FXCollections.observableArrayList();
@@ -50,7 +53,15 @@ public abstract class CustomerQuery {
 
     }
 
-    /** Inserts a new customer entry into the customers table.*/
+    /** Inserts a new customer entry into the customers table.
+     *
+     * @param customerName String customerName
+     * @param address String address
+     * @param postalCode String postalCode
+     * @param phoneNumber String phoneNumber
+     * @param divisionId int divisionId
+     * @return the number of rows affected
+     */
     public static int insertCustomer(String customerName, String address, String postalCode,
                                      String phoneNumber, int divisionId) {
         try {
@@ -73,7 +84,16 @@ public abstract class CustomerQuery {
         return -1;
     }
 
-    /** Updates the information of an existing entry in the customers table.*/
+    /** Updates the information of an existing entry in the customers table.
+     *
+     * @param customerId int customerId
+     * @param customerName String customerName
+     * @param address String address
+     * @param postalCode String postalCode
+     * @param phoneNumber String phoneNumber
+     * @param divisionId int divisionId
+     * @return the number of rows affected
+     */
     public static int updateCustomer(int customerId, String customerName, String address, String postalCode,
                                      String phoneNumber, int divisionId) {
 
@@ -97,7 +117,11 @@ public abstract class CustomerQuery {
         return -1;
     }
 
-    /** Deletes an appointment with the matching appointment id from the customers table.*/
+    /** Deletes an appointment with the matching appointment id from the customers table.
+     *
+     * @param customerId int customerId
+     * @return the number of rows affected
+     */
     public static int deleteCustomer(int customerId) {
 
         try {

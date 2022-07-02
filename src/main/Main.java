@@ -21,7 +21,7 @@ public class Main extends Application {
     /**
      *
      * @param primaryStage
-     * @throws Exception
+     * @throws Exception if the login view file fails to load
      */
     @Override
     public void start(Stage primaryStage) throws Exception{

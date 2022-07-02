@@ -123,10 +123,9 @@ public class Reports implements Initializable {
     private TableView<Customer> customersByDivisionTableView;
 
     /** The meeting total based on meeting type and month is displayed when a meeting type is chosen from the
-     * combo box.*/
-    /**
+     * combo box.
      *
-     * @param event
+     * @param event an item in the type combo box is selected
      */
     @FXML
     void onActionTypeSelected(ActionEvent event) {
@@ -147,10 +146,9 @@ public class Reports implements Initializable {
 
     }
 
-    /** When a contact is chosen the table view is populated with all the meetings associated with the contact.*/
-    /**
+    /** When a contact is chosen the table view is populated with all the meetings associated with the contact.
      *
-     * @param event
+     * @param event an item in the contacts combo box is selected
      */
     @FXML
     void onActionContactSelected(ActionEvent event) {
@@ -163,16 +161,13 @@ public class Reports implements Initializable {
 
         scheduleByContactTableView.setItems(apptList);
 
-
-
     }
 
 
-    /** Returns the user to the Startpage when pressed.*/
-    /**
+    /** Returns the user to the Startpage when pressed.
      *
-     * @param event
-     * @throws IOException
+     * @param event the returned to start page button is pressed
+     * @throws IOException if the view file fails to load
      */
     @FXML
     void onActionReturnToStartPage(ActionEvent event) throws IOException {
@@ -185,10 +180,9 @@ public class Reports implements Initializable {
     }
 
     /** When a country is selected, the division combo box is populated with only the divisions that exist within that
-     * country and currently are associated with a customer.*/
-    /**
+     * country and currently are associated with a customer.
      *
-     * @param event
+     * @param event item in country combo box being selected
      */
     @FXML
     void onActionCountrySelected(ActionEvent event) {
@@ -206,7 +200,10 @@ public class Reports implements Initializable {
     }
 
     /** When a division is selected the table view is populated with the information of all the customers that live
-     * in the selected division*/
+     * in the selected division.
+     *
+     * @param event item in division combo box being selected
+     */
     @FXML
     void onActionDivisionSelected(ActionEvent event) {
 
@@ -221,8 +218,7 @@ public class Reports implements Initializable {
 
     /** When the reports view is loaded the type and contact combo boxes are populated with the types and contacts
      *  associated with all the meetings and the country combo box is populated with the countries associated with all
-     *  the customers. */
-    /**
+     *  the customers.
      *
      * @param url
      * @param resourceBundle
@@ -275,11 +271,10 @@ public class Reports implements Initializable {
     }
 
     /** Takes the type and month of a meeting as a parameter and returns the count of the meetings matching the
-     *  parameters*/
-    /**
+     *  parameters.
      *
-     * @param type
-     * @param month
+     * @param type meeting type
+     * @param month month represented as an integer
      * @return long
      */
     public long returnCountForTypeAndMonth(String type, int month) {

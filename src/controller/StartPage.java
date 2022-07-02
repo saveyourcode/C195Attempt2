@@ -21,7 +21,9 @@ import utility.AlertMessages;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -31,6 +33,8 @@ public class StartPage implements Initializable {
 
     private Parent scene;
     private Stage stage;
+    private LocalDate localDate = LocalDate.now();
+    private LocalTime midnight = LocalTime.of(0,00);
 
     @FXML
     private TableView<Appointment> startPageAppointmentsTableView;
@@ -89,7 +93,10 @@ public class StartPage implements Initializable {
     @FXML
     private TableColumn<Customer, String> startPageCustomersTableViewPostalCodeCol;
 
-    /** When selected the appointments table view is populated with all the available appointments.*/
+    /** When selected the appointments table view is populated with all the available appointments.
+     *
+     * @param event the all radio button is selected
+     */
     @FXML
     void onActionStartPageAllRadioButton(ActionEvent event) {
 
@@ -97,7 +104,11 @@ public class StartPage implements Initializable {
 
     }
 
-    /** When selected the user is taken to the add appointment page.*/
+    /** When selected the user is taken to the add appointment page.
+     *
+     * @param event the add button is pressed
+     * @throws IOException if the add appointment view fails to load
+     */
     @FXML
     void onActionStartPageAppointmentsAdd(ActionEvent event) throws IOException {
 
@@ -109,7 +120,10 @@ public class StartPage implements Initializable {
     }
 
     /** Asks the user if they would like to delete the selected appointment and if they confirm then the selected
-     * appointment is deleted and a message is displayed with the deleted appointments ID and type.*/
+     * appointment is deleted and a message is displayed with the deleted appointments ID and type.
+     *
+     * @param event the delete button is pressed
+     */
     @FXML
     void onActionStartPageAppointmentsDelete(ActionEvent event) {
 
@@ -134,7 +148,11 @@ public class StartPage implements Initializable {
     }
 
     /** If an appointment is selected it takes the user and the selected appointment object to the modify appointment
-     * page.*/
+     * page.
+     *
+     * @param event the modify button is pressed
+     * @throws IOException if the modify appointment file fails to load
+     */
     @FXML
     void onActionStartPageAppointmentsModify(ActionEvent event) throws IOException {
 
@@ -155,7 +173,11 @@ public class StartPage implements Initializable {
 
     }
 
-    /** Takes the user to the add customer page.*/
+    /** Takes the user to the add customer page.
+     *
+     * @param event add button is pressed
+     * @throws IOException is the add customer view file fails to load
+     */
     @FXML
     void onActionStartPageCustomerAdd(ActionEvent event) throws IOException {
 
@@ -168,7 +190,10 @@ public class StartPage implements Initializable {
 
     /** Asks the user if they would like to delete the selected customer and if they confirm then the selected
      * customer's appointments are deleted and then the customer is deleted followed by a message that displays the
-     * deleted customer's name.*/
+     * deleted customer's name.
+     *
+     * @param event the deleted customer button is pressed
+     */
     @FXML
     void onActionStartPageCustomerDelete(ActionEvent event) {
 
@@ -199,7 +224,11 @@ public class StartPage implements Initializable {
     }
 
     /** If pressed when a customer is selected, the user is taken to the modify customer page where they can change
-     * an existing customer's data.*/
+     * an existing customer's data.
+     *
+     * @param event the modify customer button is pressed
+     * @throws IOException if the modify customer view file fails to load
+     */
     @FXML
     void onActionStartPageCustomerModify(ActionEvent event) throws IOException {
 
@@ -226,7 +255,10 @@ public class StartPage implements Initializable {
 
     }
 
-    /** Ends the program.*/
+    /** Ends the program.
+     *
+     * @param event the exit button is pressed
+     */
     @FXML
     void onActionStartPageExit(ActionEvent event) {
 
@@ -236,7 +268,11 @@ public class StartPage implements Initializable {
 
     }
 
-    /** Returns the user to the login page.*/
+    /** Returns the user to the login page.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionStartPageLogOut(ActionEvent event) throws IOException {
 
@@ -247,11 +283,15 @@ public class StartPage implements Initializable {
 
     }
 
-    /** Displays the appointments that have a start time within the next month.*/
+    /** Displays the appointments that have a start time within the next month.
+     *
+     * @param event the month radio button is selected
+     */
     @FXML
     void onActionStartPageMonthRadioButton(ActionEvent event) {
 
-        final LocalDateTime ldt = LocalDateTime.now().plusHours(721);
+//        final LocalDateTime ldt = LocalDateTime.now().plusHours(721);
+        LocalDateTime ldt = LocalDateTime.of(localDate, midnight).plusMonths(1);
 
         startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments().stream().
                 filter((object) -> object.getStartTime().isBefore(ldt))
@@ -259,7 +299,10 @@ public class StartPage implements Initializable {
 
     }
 
-    /** When pressed, takes the user to the reports page.*/
+    /** When pressed, takes the user to the reports page.
+     *
+     * @param actionEvent the reports button is pressed
+     */
     @FXML
     void onActionStartPageReports(ActionEvent actionEvent) {
 
@@ -278,11 +321,15 @@ public class StartPage implements Initializable {
 
     }
 
-    /** Displays the appointments that have a start time within the next week.*/
+    /** Displays the appointments that have a start time within the next week.
+     *
+     * @param event the week radio button is selected
+     */
     @FXML
     void onActionStartPageWeekRadioButton(ActionEvent event) {
 
-        final LocalDateTime ldt = LocalDateTime.now().plusHours(169);
+//        final LocalDateTime ldt = LocalDateTime.now().plusHours(169);
+        LocalDateTime ldt = LocalDateTime.of(localDate, midnight).plusWeeks(1);
 
         startPageAppointmentsTableView.setItems(AppointmentQuery.getAllAppointments().stream().
                 filter((object) -> object.getStartTime().isBefore(ldt))
@@ -291,7 +338,11 @@ public class StartPage implements Initializable {
     }
 
     /** Upon the start page being loaded, the customer and appointment table views are set up and populated with all
-     * of the customers and appointments respectively.*/
+     * of the customers and appointments respectively.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -321,7 +372,9 @@ public class StartPage implements Initializable {
     }
 
     /** When a user first logs in a message is displayed telling them if any meetings are starting within the next
-     * fifteen minutes.*/
+     * fifteen minutes.
+     *
+     */
     public void transferFromLogin() {
 
         LocalDateTime now = LocalDateTime.now();

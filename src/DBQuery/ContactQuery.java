@@ -12,7 +12,10 @@ import java.sql.SQLException;
 /** Class that holds the methods that query the contacts table in the database.*/
 public abstract class ContactQuery {
 
-    /** Returns an observable list containing objects that hold all the information for the contacts table.*/
+    /** Returns an observable list containing objects that hold all the information for the contacts table.
+     *
+     * @return an observable list of contact objects
+     */
     public static ObservableList<Contact> getAllContacts() {
 
         ObservableList<Contact> returnedList = FXCollections.observableArrayList();
@@ -37,7 +40,11 @@ public abstract class ContactQuery {
 
     }
 
-    /** Returns the Contact id that matches the contact name that is passed as a parameter.*/
+    /** Returns the Contact id that matches the contact name that is passed as a parameter.
+     *
+     * @param contactName String contactName
+     * @return the number of row affected
+     */
     public static int getContactId(String contactName) {
 
         try {
