@@ -3,9 +3,6 @@ Tile: Appointment scheduling desktop application
 Purpose: This application allows for adding new customers and updating existing customer's information in the database
          as well as creating new and updating existing appointments.
 
-Author: Kyle Jack
-
-Contact Information: kjac790@wgu.edu
 
 Application version: 1.0
 
