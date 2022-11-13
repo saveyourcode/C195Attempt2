@@ -31,7 +31,10 @@ MySQL Connector driver version number: 8.0.25
 
 The following describes the prompt and insctructions for the project:
 
-You are working for a software company that has been contracted to develop a GUI-based scheduling desktop application. The contract is with a global consulting organization that conducts business in multiple languages and has main offices in Phoenix, Arizona; White Plains, New York; Montreal, Canada; and London, England. The consulting organization has provided a MySQL database that the application must pull data from. The database is used for other systems, so its structure cannot be modified.
+You are working for a software company that has been contracted to develop a GUI-based scheduling desktop application. The contract is with a global  
+consulting organization that conducts business in multiple languages and has main offices in Phoenix, Arizona; White Plains, New York; Montreal, Canada; and 
+London, England. The consulting organization has provided a MySQL database that the application must pull data from. The database is used for other systems, 
+so its structure cannot be modified.
 
 The organization outlined specific business requirements that must be met as part of the application. From these requirements, a system analyst at your company created solution statements for you to implement in developing the application. These statements are listed in the requirements section.
 
